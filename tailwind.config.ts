@@ -12,6 +12,18 @@ export default {
         "custom-gray": "#f4f4f4",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        red: {
+          600: "#D94F4F",
+        },
+        blue: {
+          600: "#444E8D",
+        },
+        green: {
+          600: "#82E49A",
+        },
+        yellow: {
+          600: "#FFBF42",
+        },
       },
       borderRadius: {
         "card-sm": "53.09px",
