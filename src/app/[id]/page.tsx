@@ -1,3 +1,5 @@
+import PostPreview from "@/components/posts/PostPreview";
+
 interface PostPageProps {
   params: {
     id: string;
@@ -6,8 +8,7 @@ interface PostPageProps {
 
 const Post = async ({ params }: PostPageProps) => {
   const id = (await params).id;
-
-  return <h1>post {id}</h1>;
+  return <PostPreview id={id} />;
 };
 
 export default Post;

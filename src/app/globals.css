@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  font-size: 15.93px;
+} */
+
 h1, h2 {
   font-family: var(--font-playfair-display), serif;
 }
+
+/* h1 {
+  font-size: 1.75768989328rem;
+}
+
+h2 {
+  font-size: 1.55492780917rem;
+} */
 
 p {
   font-family: var(--font-open-sans), sans-serif;
