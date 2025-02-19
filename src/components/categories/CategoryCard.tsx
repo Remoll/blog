@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { CategoryCardAttributes } from "./type";
+import { CategoryCardAttributes, CategoryKey } from "@/interfaces/categories";
 import { bgClasses, borderColorClasses, textClasses } from "./consts";
 import { useEffect, useState } from "react";
 
 interface CategoryCardProps {
   category: CategoryCardAttributes;
-  currentCategoryFilter: string;
-  handleSetCategoryFilter: (key: string) => void;
+  currentCategoryFilter: CategoryKey | "";
+  handleSetCategoryFilter: (key: CategoryKey) => void;
 }
 
 const CategoryCard = ({

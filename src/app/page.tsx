@@ -1,6 +1,6 @@
 import PostList from "@/components/posts/PostsList";
 import CategoriesSlider from "@/components/categories/CategoriesSlider";
-import FavoritesFilter from "@/components/ui/slider/filters/FavoritesFilter";
+import FavoritesFilter from "@/components/ui/filters/FavoritesFilter";
 
 const Home = () => {
   return (

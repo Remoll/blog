@@ -3,14 +3,16 @@ import Slider from "@/components/ui/slider/Slider";
 import { categoriesList } from "./consts";
 import CategoryCard from "./CategoryCard";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { CategoryKey } from "@/interfaces/categories";
 
 const CategoriesSlider = () => {
   const categoryLocalStorageKey = "category";
 
-  const [currentCategoryFilter, setCurrentCategoryFilter] =
-    useLocalStorage<string>(categoryLocalStorageKey, "");
+  const [currentCategoryFilter, setCurrentCategoryFilter] = useLocalStorage<
+    CategoryKey | ""
+  >(categoryLocalStorageKey, "");
 
-  const handleSetCategoryFilter = (selectedCategoryKey: string) => {
+  const handleSetCategoryFilter = (selectedCategoryKey: CategoryKey) => {
     if (currentCategoryFilter === selectedCategoryKey) {
       setCurrentCategoryFilter("");
     } else {

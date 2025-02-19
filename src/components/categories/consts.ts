@@ -2,7 +2,7 @@ import {
   CategoryCardAttributes,
   CategoryBackgroundColor,
   CategoryTextColor,
-} from "./type";
+} from "@/interfaces/categories";
 
 const categoriesList: CategoryCardAttributes[] = [
   {
