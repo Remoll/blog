@@ -1,8 +1,9 @@
 "use client";
 import useFetchPost from "@/hooks/useFetchPost";
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface PostPreviewProps {
   id: string;
@@ -10,6 +11,29 @@ interface PostPreviewProps {
 
 const PostPreview = ({ id }: PostPreviewProps) => {
   const { post, loading } = useFetchPost(id);
+
+  const favoritePostsLocalStorageKey = "favorites";
+
+  const [currentFavoritePosts, setCurrentFavoritePosts] = useLocalStorage<
+    string[]
+  >(favoritePostsLocalStorageKey, []);
+
+  const isPostFavorive = currentFavoritePosts.includes(id);
+
+  const handleSetCategoryFilter = () => {
+    if (isPostFavorive) {
+      const newFavoritePosts = currentFavoritePosts.filter(
+        (favoritePostId) => favoritePostId !== id
+      );
+      setCurrentFavoritePosts(newFavoritePosts);
+    } else {
+      const newFavoritePosts = [...currentFavoritePosts, id];
+      setCurrentFavoritePosts(newFavoritePosts);
+    }
+  };
+
+  const StarIcon = isPostFavorive ? FaStar : FaRegStar;
+
   return (
     <>
       <Link href="/" className="flex items-center">
@@ -19,6 +43,13 @@ const PostPreview = ({ id }: PostPreviewProps) => {
         <h1>Pobieranie posta...</h1>
       ) : (
         <div>
+          <button
+            onClick={() => handleSetCategoryFilter()}
+            className="flex items-center"
+          >
+            <StarIcon size="2rem" />
+            {isPostFavorive ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
+          </button>
           <h1>{post.title}</h1>
           <p>{post.body}</p>
           <Image
