@@ -1,15 +1,25 @@
-enum CategoryColor {
+enum CategoryBackgroundColor {
   blue,
   yellow,
   red,
   green,
 }
 
+enum CategoryTextColor {
+  white,
+  black,
+}
+
 interface CategoryCardAttributes {
   backgroundImgSrc: string;
-  color: CategoryColor;
+  backgroundColor: CategoryBackgroundColor;
+  textColor: CategoryTextColor;
   label: string;
   iconSrc: string;
 }
 
-export { type CategoryCardAttributes, CategoryColor };
+export {
+  type CategoryCardAttributes,
+  CategoryBackgroundColor,
+  CategoryTextColor,
+};

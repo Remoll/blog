@@ -1,27 +1,35 @@
-import { CategoryCardAttributes, CategoryColor } from "./type";
+import {
+  CategoryCardAttributes,
+  CategoryBackgroundColor,
+  CategoryTextColor,
+} from "./type";
 
 const categoriesList: CategoryCardAttributes[] = [
   {
     backgroundImgSrc: "/books.jpg",
-    color: CategoryColor.blue,
+    backgroundColor: CategoryBackgroundColor.blue,
+    textColor: CategoryTextColor.white,
     label: "Wiedza",
     iconSrc: "/book.svg",
   },
   {
     backgroundImgSrc: "/antique-painting.jpg",
-    color: CategoryColor.yellow,
+    backgroundColor: CategoryBackgroundColor.yellow,
+    textColor: CategoryTextColor.black,
     label: "Inspiracje",
     iconSrc: "/idea.svg",
   },
   {
     backgroundImgSrc: "/scribe.jpg",
-    color: CategoryColor.red,
+    backgroundColor: CategoryBackgroundColor.red,
+    textColor: CategoryTextColor.white,
     label: "Interpretacje",
     iconSrc: "/painting.svg",
   },
   {
     backgroundImgSrc: "/city.jpg",
-    color: CategoryColor.green,
+    backgroundColor: CategoryBackgroundColor.green,
+    textColor: CategoryTextColor.black,
     label: "Dostępne",
     iconSrc: "/glasses.svg",
   },

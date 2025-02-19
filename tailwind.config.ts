@@ -12,6 +12,8 @@ export default {
         "custom-gray": "#f4f4f4",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#1E2C3B",
+        secondary: "#363B5C",
         red: {
           600: "#D94F4F",
         },
