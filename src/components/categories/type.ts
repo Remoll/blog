@@ -16,6 +16,7 @@ interface CategoryCardAttributes {
   textColor: CategoryTextColor;
   label: string;
   iconSrc: string;
+  key: string;
 }
 
 export {

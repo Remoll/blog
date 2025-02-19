@@ -16,15 +16,19 @@ export default {
         secondary: "#363B5C",
         red: {
           600: "#D94F4F",
+          700: "#A02E41",
         },
         blue: {
           600: "#444E8D",
+          700: "#0B2D7F",
         },
         green: {
           600: "#82E49A",
+          700: "#49C38C",
         },
         yellow: {
           600: "#FFBF42",
+          700: "#C69E34",
         },
       },
       borderRadius: {

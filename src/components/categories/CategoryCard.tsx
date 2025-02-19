@@ -1,32 +1,41 @@
 import Image from "next/image";
-import {
-  CategoryCardAttributes,
-  CategoryBackgroundColor,
-  CategoryTextColor,
-} from "./type";
+import { CategoryCardAttributes } from "./type";
+import { bgClasses, borderColorClasses, textClasses } from "./consts";
+import { useEffect, useState } from "react";
 
 interface CategoryCardProps {
   category: CategoryCardAttributes;
+  currentCategoryFilter: string;
+  handleSetCategoryFilter: (key: string) => void;
 }
 
-const CategoryCard = ({ category }: CategoryCardProps) => {
-  const { backgroundImgSrc, backgroundColor, textColor, label, iconSrc } =
+const CategoryCard = ({
+  category,
+  currentCategoryFilter,
+  handleSetCategoryFilter,
+}: CategoryCardProps) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const { backgroundImgSrc, backgroundColor, textColor, label, iconSrc, key } =
     category;
 
-  const bgClasses: Record<CategoryBackgroundColor, string> = {
-    [CategoryBackgroundColor.red]: "bg-red-600",
-    [CategoryBackgroundColor.yellow]: "bg-yellow-600",
-    [CategoryBackgroundColor.blue]: "bg-blue-600",
-    [CategoryBackgroundColor.green]: "bg-green-600",
-  };
+  const borderClass = `border-[6px] ${borderColorClasses[backgroundColor]}`;
 
-  const textClasses: Record<CategoryTextColor, string> = {
-    [CategoryTextColor.white]: "text-white",
-    [CategoryTextColor.black]: "text-[#414042]",
-  };
+  const isCategorySelected = currentCategoryFilter === key;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-tl-card-md rounded-br-card-md h-[433px]">
+    <div
+      onClick={() => handleSetCategoryFilter(key)}
+      className={`flex flex-col overflow-hidden rounded-tl-card-md rounded-br-card-md h-[433px] ${
+        isCategorySelected && borderClass
+      }`}
+    >
       <Image
         src={backgroundImgSrc}
         alt="Logo"
