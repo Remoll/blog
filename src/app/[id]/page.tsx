@@ -2,7 +2,7 @@ import PostPreview from "@/components/posts/PostPreview";
 
 interface PostPageProps {
   params: {
-    id: string;
+    id: number;
   };
 }
 

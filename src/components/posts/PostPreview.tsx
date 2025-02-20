@@ -11,7 +11,7 @@ import {
 } from "@/store/slices/postsSlice";
 
 interface PostPreviewProps {
-  id: string;
+  id: number;
 }
 
 const PostPreview = ({ id }: PostPreviewProps) => {

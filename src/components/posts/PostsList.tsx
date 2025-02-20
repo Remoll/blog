@@ -3,6 +3,7 @@ import useFetchPostsList from "@/hooks/useFetchPostsList";
 import PostCard from "./PostCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { filterPosts } from "./utils";
 
 const PostList = () => {
   const { posts, loading } = useFetchPostsList();
@@ -11,12 +12,20 @@ const PostList = () => {
     (state: RootState) => state.categories.currentCategory
   );
 
-  const filteredPosts =
-    currentCategoryFilter === ""
-      ? posts
-      : posts?.filter((post) => {
-          return post?.category === currentCategoryFilter;
-        });
+  const isFavoritesFilterActive = useSelector(
+    (state: RootState) => state.filters.isFavoritesFilterActive
+  );
+
+  const favoritesPosts = useSelector(
+    (state: RootState) => state.posts.favorites
+  );
+
+  const filteredPosts = filterPosts(
+    posts,
+    currentCategoryFilter,
+    isFavoritesFilterActive,
+    favoritesPosts
+  );
 
   return loading ? (
     <h1>Pobieranie postów...</h1>

@@ -1,18 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const getInitialFavorites = (): string[] => {
+const getInitialFavorites = (): number[] => {
   if (typeof window !== "undefined") {
     const jsonFavorites = localStorage.getItem("favorites");
     if (!jsonFavorites) {
       return [];
     }
-    return JSON.parse(jsonFavorites);
+
+    const favoritesList = JSON.parse(jsonFavorites).map((id: string) =>
+      parseInt(id)
+    );
+
+    return favoritesList;
   }
   return [];
 };
 
 interface PostsState {
-  favorites: string[];
+  favorites: number[];
 }
 
 const initialState: PostsState = {
@@ -23,7 +28,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPostToFavorites: (state, action: PayloadAction<string>) => {
+    addPostToFavorites: (state, action: PayloadAction<number>) => {
       state.favorites.push(action.payload);
 
       if (typeof window !== "undefined") {
@@ -31,7 +36,7 @@ const postsSlice = createSlice({
         localStorage.setItem("favorites", jsonFavorites);
       }
     },
-    removePostFromFavorites: (state, action: PayloadAction<string>) => {
+    removePostFromFavorites: (state, action: PayloadAction<number>) => {
       state.favorites = state.favorites.filter(
         (postId) => postId !== action.payload
       );
