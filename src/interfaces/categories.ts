@@ -1,34 +1,21 @@
 enum CategoryKey {
-  knowledge,
-  inspirations,
-  interpretations,
-  accessible,
-}
-
-enum CategoryBackgroundColor {
-  blue,
-  yellow,
-  red,
-  green,
+  knowledge = "knowledge",
+  inspirations = "inspirations",
+  interpretations = "interpretations",
+  accessible = "accessible",
 }
 
 enum CategoryTextColor {
-  white,
-  black,
+  white = "white",
+  black = "black",
 }
 
 interface CategoryCardAttributes {
   backgroundImgSrc: string;
-  backgroundColor: CategoryBackgroundColor;
   textColor: CategoryTextColor;
   label: string;
   iconSrc: string;
   key: CategoryKey;
 }
 
-export {
-  type CategoryCardAttributes,
-  CategoryBackgroundColor,
-  CategoryTextColor,
-  CategoryKey,
-};
+export { type CategoryCardAttributes, CategoryTextColor, CategoryKey };

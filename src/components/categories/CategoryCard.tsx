@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { CategoryCardAttributes, CategoryKey } from "@/interfaces/categories";
-import { bgClasses, borderColorClasses, textClasses } from "./consts";
+import {
+  categoryBgColorClasses,
+  categoryBorderColorClasses,
+  textClasses,
+} from "./consts";
 import { useEffect, useState } from "react";
 
 interface CategoryCardProps {
@@ -22,10 +26,9 @@ const CategoryCard = ({
 
   if (!mounted) return null;
 
-  const { backgroundImgSrc, backgroundColor, textColor, label, iconSrc, key } =
-    category;
+  const { backgroundImgSrc, textColor, label, iconSrc, key } = category;
 
-  const borderClass = `border-[6px] ${borderColorClasses[backgroundColor]}`;
+  const borderClass = `border-[6px] ${categoryBorderColorClasses[key]}`;
 
   const isCategorySelected = currentCategoryFilter === key;
 
@@ -44,7 +47,7 @@ const CategoryCard = ({
         className="object-cover w-full flex-1 h-[50%]"
       />
       <div
-        className={`${bgClasses[backgroundColor]} flex flex-col flex-1 items-center justify-center`}
+        className={`${categoryBgColorClasses[key]} flex flex-col flex-1 items-center justify-center`}
       >
         <p className={`${textClasses[textColor]} uppercase pb-3 font-bold`}>
           {label}

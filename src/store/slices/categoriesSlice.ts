@@ -26,8 +26,14 @@ const categoriesSlice = createSlice({
         localStorage.setItem("category", action.payload as string);
       }
     },
+    clearCategory: (state) => {
+      state.currentCategory = "";
+      if (typeof window !== "undefined") {
+        localStorage.setItem("category", "");
+      }
+    },
   },
 });
 
-export const { setCategory } = categoriesSlice.actions;
+export const { setCategory, clearCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

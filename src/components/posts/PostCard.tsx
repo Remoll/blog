@@ -1,15 +1,18 @@
 import { Post } from "@/interfaces/posts";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import { categoryLabels } from "../categories/consts";
 
 interface PostCardProps {
   post: Post;
 }
 
 const PostCard = ({ post }: PostCardProps) => {
+  const categoryLabel = categoryLabels[post.category];
+
   return (
     <div className="bg-custom-gray rounded-tl-card-md rounded-br-card-md py-[51.615px] px-[35px]">
-      <p>{post.category}</p>
+      <p>{categoryLabel}</p>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
       <Link href={{ pathname: `/${post.id}` }} className="flex items-center">

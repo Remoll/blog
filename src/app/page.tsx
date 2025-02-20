@@ -1,14 +1,14 @@
-import PostList from "@/components/posts/PostsList";
+import PostsList from "@/components/posts/PostsList";
 import CategoriesSlider from "@/components/categories/CategoriesSlider";
-import FavoritesFilter from "@/components/ui/filters/FavoritesFilter";
+import PostsFilters from "@/components/posts/PostsFilters";
 
 const Home = () => {
   return (
     <>
       <h1>Blog edukacyjny</h1>
       <CategoriesSlider />
-      <FavoritesFilter />
-      <PostList />
+      <PostsFilters />
+      <PostsList />
     </>
   );
 };
