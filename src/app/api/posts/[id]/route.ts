@@ -1,7 +1,10 @@
 import { supabase } from "@/supabase/supabaseClient";
 
-export async function GET(_, { params }) {
-  const { id } = params;
+export async function GET(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
 
   const { data, error } = await supabase
     .from("posts")

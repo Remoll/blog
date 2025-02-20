@@ -1,9 +1,9 @@
 import PostPreview from "@/components/posts/PostPreview";
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const Post = async ({ params }: PostPageProps) => {
