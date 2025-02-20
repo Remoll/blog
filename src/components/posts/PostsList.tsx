@@ -1,5 +1,5 @@
 "use client";
-import useFetchPostsList from "@/hooks/useFetchPostsList";
+import useFetchPostsList from "@/hooks/posts/useFetchPostsList";
 import PostCard from "./PostCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";

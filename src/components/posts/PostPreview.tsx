@@ -1,5 +1,5 @@
 "use client";
-import useFetchPost from "@/hooks/useFetchPost";
+import useFetchPost from "@/hooks/posts/useFetchPost";
 import Link from "next/link";
 import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import {
   addPostToFavorites,
   removePostFromFavorites,
 } from "@/store/slices/postsSlice";
+import SafeHtml from "../ui/safeHtml/safeHtml";
 
 interface PostPreviewProps {
   id: number;
@@ -51,10 +52,11 @@ const PostPreview = ({ id }: PostPreviewProps) => {
             <StarIcon size="2rem" />
             {isPostFavorive ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
           </button>
-          <h1>{post.title}</h1>
-          <p>{post.body}</p>
+          <h1>{post?.title}</h1>
+          <p>{post?.description}</p>
+          <SafeHtml html={post.body} />
           <Image
-            src="/example-blog-photo.jpg"
+            src={post?.imageUrl}
             alt="example-blog-photo"
             width={185}
             height={58}
