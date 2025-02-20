@@ -7,7 +7,7 @@ interface Post {
   description: string;
   userId: number;
   category: CategoryKey;
-  createDate: Date;
+  createDate: string;
   imageUrl: string;
 }
 

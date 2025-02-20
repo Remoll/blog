@@ -43,7 +43,7 @@ const PostPreview = ({ id }: PostPreviewProps) => {
       </Link>
       {loading ? (
         <h1>Pobieranie posta...</h1>
-      ) : (
+      ) : post ? (
         <div>
           <button
             onClick={() => handleSetCategoryFilter()}
@@ -63,6 +63,8 @@ const PostPreview = ({ id }: PostPreviewProps) => {
             className="object-cover w-full h-[574px] rounded-tl-card-lg rounded-br-card-lg"
           />
         </div>
+      ) : (
+        <h1>Nie udało się pobrać posta</h1>
       )}
     </>
   );

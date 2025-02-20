@@ -15,7 +15,7 @@ const getInitialState = (): SortOrder => {
 };
 
 interface SorterState {
-  postSorter: string;
+  postSorter: SortOrder;
 }
 
 const initialState: SorterState = {

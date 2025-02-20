@@ -3,11 +3,11 @@ import { SortOrder } from "@/interfaces/common";
 import { Post } from "@/interfaces/posts";
 
 const filterPosts = (
-  posts: (Post | undefined)[] | undefined,
+  posts: Post[],
   currentCategory: CategoryKey | "",
   isFavoritesFilterActive: boolean,
   favoritePostsIds: number[]
-) => {
+): Post[] => {
   if (!posts) {
     return [];
   }
