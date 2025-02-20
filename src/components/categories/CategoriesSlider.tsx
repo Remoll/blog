@@ -2,21 +2,22 @@
 import Slider from "@/components/ui/slider/Slider";
 import { categoriesList } from "./consts";
 import CategoryCard from "./CategoryCard";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { CategoryKey } from "@/interfaces/categories";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "@/store/slices/categoriesSlice";
+import { RootState } from "@/store/store";
 
 const CategoriesSlider = () => {
-  const categoryLocalStorageKey = "category";
-
-  const [currentCategoryFilter, setCurrentCategoryFilter] = useLocalStorage<
-    CategoryKey | ""
-  >(categoryLocalStorageKey, "");
+  const dispatch = useDispatch();
+  const currentCategoryFilter = useSelector(
+    (state: RootState) => state.categories.currentCategory
+  );
 
   const handleSetCategoryFilter = (selectedCategoryKey: CategoryKey) => {
     if (currentCategoryFilter === selectedCategoryKey) {
-      setCurrentCategoryFilter("");
+      dispatch(setCategory(""));
     } else {
-      setCurrentCategoryFilter(selectedCategoryKey);
+      dispatch(setCategory(selectedCategoryKey));
     }
   };
 

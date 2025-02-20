@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import ClientProviders from "@/components/providers/ClientProviders";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
@@ -32,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <body
         className={`${playfairDisplay.variable} ${poppins.variable} ${openSans.variable}`}
       >
@@ -45,7 +46,9 @@ export default function RootLayout({
             className="w-auto"
           />
         </header>
-        <main>{children}</main>
+        <main>
+          <ClientProviders>{children}</ClientProviders>
+        </main>
       </body>
     </html>
   );

@@ -1,23 +1,22 @@
 "use client";
 import useFetchPostsList from "@/hooks/useFetchPostsList";
 import PostCard from "./PostCard";
-import useLocalStorage from "@/hooks/useLocalStorage";
-import { CategoryKey } from "@/interfaces/categories";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const PostList = () => {
   const { posts, loading } = useFetchPostsList();
 
-  const categoryLocalStorageKey = "category";
-
-  const [currentCategoryFilter] = useLocalStorage<CategoryKey | "">(
-    categoryLocalStorageKey,
-    ""
+  const currentCategoryFilter = useSelector(
+    (state: RootState) => state.categories.currentCategory
   );
 
   const filteredPosts =
     currentCategoryFilter === ""
       ? posts
-      : posts?.filter((post) => post?.category === currentCategoryFilter);
+      : posts?.filter((post) => {
+          return post?.category === currentCategoryFilter;
+        });
 
   return loading ? (
     <h1>Pobieranie postów...</h1>

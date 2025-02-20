@@ -3,7 +3,12 @@ import useFetchPost from "@/hooks/useFetchPost";
 import Link from "next/link";
 import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
-import useLocalStorage from "@/hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import {
+  addPostToFavorites,
+  removePostFromFavorites,
+} from "@/store/slices/postsSlice";
 
 interface PostPreviewProps {
   id: string;
@@ -12,23 +17,19 @@ interface PostPreviewProps {
 const PostPreview = ({ id }: PostPreviewProps) => {
   const { post, loading } = useFetchPost(id);
 
-  const favoritePostsLocalStorageKey = "favorites";
+  const dispatch = useDispatch();
 
-  const [currentFavoritePosts, setCurrentFavoritePosts] = useLocalStorage<
-    string[]
-  >(favoritePostsLocalStorageKey, []);
+  const favoritesPosts = useSelector(
+    (state: RootState) => state.posts.favorites
+  );
 
-  const isPostFavorive = currentFavoritePosts.includes(id);
+  const isPostFavorive = favoritesPosts.includes(id);
 
   const handleSetCategoryFilter = () => {
     if (isPostFavorive) {
-      const newFavoritePosts = currentFavoritePosts.filter(
-        (favoritePostId) => favoritePostId !== id
-      );
-      setCurrentFavoritePosts(newFavoritePosts);
+      dispatch(removePostFromFavorites(id));
     } else {
-      const newFavoritePosts = [...currentFavoritePosts, id];
-      setCurrentFavoritePosts(newFavoritePosts);
+      dispatch(addPostToFavorites(id));
     }
   };
 
