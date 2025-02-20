@@ -11,8 +11,9 @@ interface SliderProps {
 
 const Slider: React.FC<SliderProps> = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const touchStartXRef = useRef<number | null>(null);
 
   const moveSlide = (direction: Direction) => {
     const nextSlide = getNextSlideIndex(
@@ -23,23 +24,47 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
     setCurrentIndex(nextSlide);
   };
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    touchStartXRef.current = event.touches[0].clientX;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setDragStartX(e.touches[0].clientX);
+    setIsDragging(true);
   };
 
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartXRef.current === null) {
-      return;
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - dragStartX;
+    if (sliderRef.current) {
+      sliderRef.current.style.transform = `translateX(calc(-${
+        currentIndex * 100
+      }% + ${deltaX}px))`;
     }
-    const touchEndX = event.changedTouches[0].clientX;
-    const deltaX = touchEndX - touchStartXRef.current;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setIsDragging(false);
     const threshold = 50;
-    if (deltaX > threshold) {
-      moveSlide(Direction.left);
-    } else if (deltaX < -threshold) {
-      moveSlide(Direction.right);
+    const currentX = e.changedTouches[0].clientX;
+    const deltaX = currentX - dragStartX;
+
+    if (Math.abs(deltaX) > threshold) {
+      if (deltaX > 0) {
+        moveSlide(Direction.left);
+      } else {
+        moveSlide(Direction.right);
+      }
+    } else {
+      if (sliderRef.current) {
+        sliderRef.current.style.transition = "transform 0.3s ease-out";
+        sliderRef.current.style.transform = `translateX(-${
+          currentIndex * 100
+        }%)`;
+      }
+      setTimeout(() => {
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = "";
+        }
+      }, 100);
     }
-    touchStartXRef.current = null;
   };
 
   useEffect(() => {
@@ -56,6 +81,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
         className="flex transition-transform duration-500"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {React.Children.map(children, (child, index) => (
