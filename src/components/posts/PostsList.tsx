@@ -3,7 +3,7 @@ import useFetchPostsList from "@/hooks/posts/useFetchPostsList";
 import PostCard from "./PostCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { filterPosts } from "./utils";
+import { filterPosts, sortPosts } from "./utils";
 
 const PostList = () => {
   const { posts, loading } = useFetchPostsList();
@@ -20,6 +20,10 @@ const PostList = () => {
     (state: RootState) => state.posts.favorites
   );
 
+  const postSorterValue = useSelector(
+    (state: RootState) => state.sorter.postSorter
+  );
+
   const filteredPosts = filterPosts(
     posts,
     currentCategoryFilter,
@@ -27,11 +31,13 @@ const PostList = () => {
     favoritesPosts
   );
 
+  const sortedPosts = sortPosts(filteredPosts, postSorterValue);
+
   return loading ? (
     <h1>Pobieranie postów...</h1>
   ) : (
     <ul className="flex flex-col gap-[56px]">
-      {filteredPosts.map((post) => (
+      {sortedPosts.map((post) => (
         <li key={post.id}>
           <PostCard post={post} />
         </li>
