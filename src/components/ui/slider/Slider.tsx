@@ -36,7 +36,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
     if (sliderRef.current) {
       sliderRef.current.style.transform = `translateX(calc(-${
         currentIndex * 100
-      }% + ${deltaX}px))`;
+      }% + ${deltaX * 5}px))`;
     }
   };
 
