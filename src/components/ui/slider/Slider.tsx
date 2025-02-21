@@ -2,8 +2,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import DotMarkers from "./DotMarkers";
 import { Direction } from "./types";
-import { getNextSlideIndex } from "./utils";
+import {
+  getNextSlideIndex,
+  getSlideTransformXProperty,
+  resetSlidePosition,
+  resetSlideTransformXProperty,
+} from "./utils";
 import Arrow from "./Arrow";
+import { thresholdInPx } from "./consts";
 
 interface SliderProps {
   children: React.ReactNode[];
@@ -12,7 +18,7 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
+  const [touchStartPositionX, setTouchStartPositionX] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const moveSlide = (direction: Direction) => {
@@ -25,52 +31,38 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    setDragStartX(e.touches[0].clientX);
+    setTouchStartPositionX(e.touches[0].clientX);
     setIsDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const currentX = e.touches[0].clientX;
-    const deltaX = currentX - dragStartX;
-    if (sliderRef.current) {
-      sliderRef.current.style.transform = `translateX(calc(-${
-        currentIndex * 100
-      }% + ${deltaX}px))`;
+    if (!isDragging || !sliderRef.current || typeof currentIndex !== "number") {
+      return;
     }
+    const touchCurrentPositionX = e.touches[0].clientX;
+    sliderRef.current.style.transform = getSlideTransformXProperty(
+      currentIndex,
+      touchStartPositionX,
+      touchCurrentPositionX
+    );
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     setIsDragging(false);
-    const threshold = 50;
-    const currentX = e.changedTouches[0].clientX;
-    const deltaX = currentX - dragStartX;
+    const touchFinalPositionX = e.changedTouches[0].clientX;
+    const deltaX = touchFinalPositionX - touchStartPositionX;
+    const isMovePastThreshold = Math.abs(deltaX) > thresholdInPx;
 
-    if (Math.abs(deltaX) > threshold) {
-      if (deltaX > 0) {
-        moveSlide(Direction.left);
-      } else {
-        moveSlide(Direction.right);
-      }
+    if (isMovePastThreshold) {
+      const moveDirection = deltaX > 0 ? Direction.left : Direction.right;
+      moveSlide(moveDirection);
     } else {
-      if (sliderRef.current) {
-        sliderRef.current.style.transition = "transform 0.3s ease-out";
-        sliderRef.current.style.transform = `translateX(-${
-          currentIndex * 100
-        }%)`;
-      }
-      setTimeout(() => {
-        if (sliderRef.current) {
-          sliderRef.current.style.transition = "";
-        }
-      }, 100);
+      resetSlidePosition(currentIndex, sliderRef);
     }
   };
 
   useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
+    resetSlideTransformXProperty(currentIndex, sliderRef);
   }, [currentIndex]);
 
   return (

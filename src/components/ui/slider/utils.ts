@@ -1,3 +1,4 @@
+import { slideResetPositionClasses } from "./consts";
 import { Direction } from "./types";
 
 const getNextSlideIndex = (
@@ -23,4 +24,50 @@ const getNextSlideIndex = (
   }
 };
 
-export { getNextSlideIndex };
+const getTranslateXProperty = (translateValue: string | number) =>
+  `translateX(${translateValue})`;
+
+const resetSlideTransformXProperty = (
+  currentIndex: number | undefined,
+  sliderRef: React.RefObject<HTMLDivElement | null>
+) => {
+  if (!sliderRef?.current || currentIndex === undefined) {
+    return;
+  }
+
+  const translateValue = `-${currentIndex * 100}%`;
+
+  sliderRef.current.style.transform = getTranslateXProperty(translateValue);
+};
+
+const getSlideTransformXProperty = (
+  currentIndex: number,
+  touchStartPositionX: number,
+  touchCurrentPositionX: number
+): string => {
+  const deltaX = touchCurrentPositionX - touchStartPositionX;
+  const translateValue = `calc(-${currentIndex * 100}% + ${deltaX}px)`;
+  return getTranslateXProperty(translateValue);
+};
+
+const resetSlidePosition = (
+  currentIndex: number | undefined,
+  sliderRef: React.RefObject<HTMLDivElement | null>
+) => {
+  if (sliderRef.current) {
+    sliderRef.current.style.transition = slideResetPositionClasses;
+    resetSlideTransformXProperty(currentIndex, sliderRef);
+  }
+  setTimeout(() => {
+    if (sliderRef.current) {
+      sliderRef.current.style.transition = "";
+    }
+  }, 100);
+};
+
+export {
+  getNextSlideIndex,
+  resetSlideTransformXProperty,
+  getSlideTransformXProperty,
+  resetSlidePosition,
+};
