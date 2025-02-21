@@ -2,22 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  font-size: 15.93px;
-} */
-
-h1, h2 {
-  font-family: var(--font-playfair-display), serif;
+body {
+  font-size: 16px;
 }
 
-/* h1 {
-  font-size: 1.75768989328rem;
+h1 {
+  font-family: var(--font-open-sans), sans-serif;
+  font-size: 1.75rem;
 }
 
 h2 {
-  font-size: 1.55492780917rem;
-} */
+  font-family: var(--font-playfair-display), serif;
+}
 
 p {
-  font-family: var(--font-open-sans), sans-serif;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.125rem
 }

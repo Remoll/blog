@@ -70,7 +70,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
       <DotMarkers currentIndex={currentIndex}>{children}</DotMarkers>
 
       <div
-        className="flex transition-transform"
+        className="flex transition-transform pt-5"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}

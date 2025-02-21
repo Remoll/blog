@@ -43,7 +43,7 @@ export default function RootLayout({
             alt="Logo"
             width={185}
             height={58}
-            className="w-auto"
+            className="w-auto p-6"
           />
         </header>
         <main>

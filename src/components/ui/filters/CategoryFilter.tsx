@@ -30,13 +30,13 @@ const CategoryFilter = () => {
   return categoryLabel ? (
     <div className="flex items-center">
       <p
-        className={`${categoryTextColorClasses[currentCategoryFilter]} underline uppercase font-bold pr-4`}
+        className={`${categoryTextColorClasses[currentCategoryFilter]} underline uppercase font-bold pr-4 text-xs`}
       >
         {categoryLabel}
       </p>
       <button
         onClick={() => dispatch(clearCategory())}
-        className="flex items-center"
+        className="flex items-center text-xs"
       >
         <RxCross2 />
       </button>

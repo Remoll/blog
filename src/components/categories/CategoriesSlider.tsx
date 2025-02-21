@@ -22,7 +22,7 @@ const CategoriesSlider = () => {
   };
 
   return (
-    <div className="bg-custom-gray py-4">
+    <div className="bg-custom-gray pt-7 pb-12">
       <Slider>
         {categoriesList.map((category) => (
           <CategoryCard

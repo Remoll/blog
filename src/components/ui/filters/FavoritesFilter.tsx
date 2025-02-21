@@ -25,17 +25,21 @@ const FavoritesFilter = () => {
   const activeClasses = "underline font-bold";
 
   return (
-    <div>
+    <div className="text-xs font-poppins">
       <button
         onClick={() => dispatch(disableFavotiresFilter())}
-        className={`${!isFavoritesFilterActive ? activeClasses : ""} uppercase`}
+        className={`${
+          !isFavoritesFilterActive ? activeClasses : ""
+        } uppercase pr-5`}
       >
         Wszystkie
       </button>
       /
       <button
         onClick={() => dispatch(activeFavotiresFilter())}
-        className={`${isFavoritesFilterActive ? activeClasses : ""} uppercase`}
+        className={`${
+          isFavoritesFilterActive ? activeClasses : ""
+        } uppercase pl-2`}
       >
         Ulubione
       </button>

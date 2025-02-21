@@ -36,7 +36,7 @@ const PostList = () => {
   return loading ? (
     <h1>Pobieranie postów...</h1>
   ) : (
-    <ul className="flex flex-col gap-[56px]">
+    <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {sortedPosts.map((post) => (
         <li key={post.id}>
           <PostCard post={post} />

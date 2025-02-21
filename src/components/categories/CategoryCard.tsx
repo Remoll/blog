@@ -49,7 +49,9 @@ const CategoryCard = ({
       <div
         className={`${categoryBgColorClasses[key]} flex flex-col flex-1 items-center justify-center`}
       >
-        <p className={`${textClasses[textColor]} uppercase pb-3 font-bold`}>
+        <p
+          className={`${textClasses[textColor]} uppercase pb-3 font-bold text-3xl font-open-sans`}
+        >
           {label}
         </p>
         <Image src={iconSrc} alt="Logo" width={53} height={53} />

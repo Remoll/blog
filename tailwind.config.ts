@@ -36,6 +36,25 @@ export default {
         "card-md": "60px",
         "card-lg": "60.37px",
       },
+      fontFamily: {
+        playfair: "var(--font-playfair-display), serif",
+        poppins: "var(--font-poppins), sans-serif",
+        opensans: "var(--font-open-sans), sans-serif",
+      },
+      fontSize: {
+        "2xs": "0.75rem", // 12px
+        xs: "0.875rem", // 14px
+        sm: "0.9375rem", // 15px
+        base: "1rem", // 16px
+        xl: "1.125rem", // 18px
+        "2xl": "1.22rem", // ~19.47px
+        "3xl": "1.25rem", // 20px
+        "4xl": "1.5rem", // 24px
+        "5xl": "1.55rem", // ~24.77px
+        "6xl": "1.75rem", // 28px
+        "7xl": "2rem", // 32px
+        "8xl": "2.19rem", // ~35px
+      },
     },
   },
   plugins: [],
