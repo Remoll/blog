@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { CategoryCardAttributes, CategoryKey } from "@/interfaces/categories";
 import {
@@ -35,7 +36,7 @@ const CategoryCard = ({
   return (
     <div
       onClick={() => handleSetCategoryFilter(key)}
-      className={`flex flex-col overflow-hidden rounded-tl-card-md rounded-br-card-md h-[433px] ${
+      className={`flex flex-col overflow-hidden cursor-pointer rounded-tl-card-md rounded-br-card-md h-[27rem] ${
         isCategorySelected && borderClass
       }`}
     >

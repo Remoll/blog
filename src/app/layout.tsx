@@ -3,6 +3,7 @@ import { Playfair_Display, Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import ClientProviders from "@/components/providers/ClientProviders";
+import { globalPaddingClasses } from "@/consts/consts";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
@@ -43,7 +44,7 @@ export default function RootLayout({
             alt="Logo"
             width={185}
             height={58}
-            className="w-auto p-6"
+            className={`w-auto p-6 ${globalPaddingClasses}`}
           />
         </header>
         <main>
