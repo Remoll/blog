@@ -36,7 +36,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
     if (sliderRef.current) {
       sliderRef.current.style.transform = `translateX(calc(-${
         currentIndex * 100
-      }% + ${deltaX * 5}px))`;
+      }% + ${deltaX * 2}px))`;
     }
   };
 
@@ -78,7 +78,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
       <DotMarkers currentIndex={currentIndex}>{children}</DotMarkers>
 
       <div
-        className="flex transition-transform duration-500"
+        className="flex transition-transform"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
