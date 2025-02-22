@@ -88,7 +88,9 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
         state.postsList = [];
-        state.error = action.payload.error || "Error fetching posts";
+        //TODO: do poprawy
+        const errorMessage = (action.payload as { error: string }).error;
+        state.error = errorMessage || "Error fetching posts";
       });
   },
 });
