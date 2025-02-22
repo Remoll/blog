@@ -1,6 +1,5 @@
 "use client";
 import useFetchPost from "@/hooks/posts/useFetchPost";
-import Link from "next/link";
 import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
