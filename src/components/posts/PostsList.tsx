@@ -1,13 +1,12 @@
 "use client";
-import useFetchPostsList from "@/hooks/posts/useFetchPostsList";
 import PostCard from "./PostCard";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
 import { filterPosts, sortPosts } from "./utils";
+import { useEffect } from "react";
+import { fetchPosts } from "@/store/slices/postsSlice";
 
 const PostList = () => {
-  const { posts, loading } = useFetchPostsList();
-
   const currentCategoryFilter = useSelector(
     (state: RootState) => state.categories.currentCategory
   );
@@ -16,16 +15,19 @@ const PostList = () => {
     (state: RootState) => state.filters.isFavoritesFilterActive
   );
 
-  const favoritesPosts = useSelector(
-    (state: RootState) => state.posts.favorites
-  );
+  const {
+    favorites: favoritesPosts,
+    postsList,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.posts);
 
   const postSorterValue = useSelector(
     (state: RootState) => state.sorter.postSorter
   );
 
   const filteredPosts = filterPosts(
-    posts,
+    postsList,
     currentCategoryFilter,
     isFavoritesFilterActive,
     favoritesPosts
@@ -33,9 +35,18 @@ const PostList = () => {
 
   const sortedPosts = sortPosts(filteredPosts, postSorterValue);
 
-  return loading ? (
-    <h1>Pobieranie postów...</h1>
-  ) : (
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (postsList.length === 0) {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, postsList.length]);
+
+  if (loading) return <h1>Pobieranie postów...</h1>;
+  if (error) return <p>Błąd: {error}</p>;
+
+  return (
     <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {sortedPosts.map((post) => (
         <li key={post.id}>

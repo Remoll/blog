@@ -11,6 +11,7 @@ import {
 } from "@/store/slices/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
+import { useRouter } from "next/navigation";
 
 interface PostPreviewProps {
   id: number;
@@ -18,6 +19,8 @@ interface PostPreviewProps {
 
 const PostPreview = ({ id }: PostPreviewProps) => {
   const { post, loading } = useFetchPost(id);
+
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -40,12 +43,16 @@ const PostPreview = ({ id }: PostPreviewProps) => {
   return (
     <div className={`${globalPaddingClasses} max-w-[75rem]`}>
       <div className="flex flex-col md:flex-row justify-between pt-3">
-        <Link href="/" className={`flex items-center pb-6`}>
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className={`flex items-center pb-6`}
+        >
           <FaArrowLeft className="text-black" />
           <span className="text-7xl font-opensans font-bold pl-3">
             Blog Edukacyjny
           </span>
-        </Link>
+        </button>
         {post && (
           <button
             onClick={() => handleSetCategoryFilter()}
