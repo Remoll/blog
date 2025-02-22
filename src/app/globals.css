@@ -6,3 +6,28 @@ body {
   @apply text-primary;
   font-size: 16px;
 }
+
+.article-body h1, .article-body h2 {
+  @apply text-primary;
+  @apply font-bold;
+  @apply font-opensans;
+  @apply leading-2xloose;
+}
+
+.article-body h1 {
+  @apply text-6xl;
+  @apply pb-4;
+}
+
+.article-body h2 {
+  @apply text-3xl;
+  @apply pb-2;
+}
+
+.article-body p {
+  @apply text-black;
+  @apply text-xl;
+  @apply leading-xloose;
+  @apply font-poppins;
+  @apply pb-5;
+}

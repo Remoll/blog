@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { setPostSorterValue } from "@/store/slices/sorterSlice";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import { mobileBreakpoint } from "@/consts/consts";
 
 const options: SelectOption[] = [
   { value: SortOrder.newest, label: "Najnowsze wpisy" },
@@ -16,7 +14,7 @@ const options: SelectOption[] = [
 const PostSorter = () => {
   const [mounted, setMounted] = useState(false);
 
-  const isMobile = useMediaQuery(mobileBreakpoint);
+  const isMobile = useSelector((state: RootState) => state.device.isMobile);
 
   const dispatch = useDispatch();
 

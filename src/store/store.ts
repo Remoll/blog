@@ -3,6 +3,7 @@ import categoriesReducer from "./slices/categoriesSlice";
 import postsReducer from "./slices/postsSlice";
 import filtersReducer from "./slices/filtersSlice";
 import sorterReducer from "./slices/sorterSlice";
+import deviceReducer from "./slices/deviceSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     posts: postsReducer,
     filters: filtersReducer,
     sorter: sorterReducer,
+    device: deviceReducer,
   },
 });
 

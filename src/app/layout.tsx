@@ -1,26 +1,26 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
 import ClientProviders from "@/components/providers/ClientProviders";
-import { globalPaddingClasses } from "@/consts/consts";
+import GlobalHeader from "@/components/ui/GlobalHeader";
+import DeviceUpdater from "@/components/ui/DeviceUpdater";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
   subsets: ["latin"],
-  weight: ["400", "700"], // Regular i Bold
+  weight: ["400", "700"],
 });
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "700"], // Regular, Medium, Bold
+  weight: ["400", "500", "700"],
 });
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // Regular, Semi-Bold, Bold
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -38,18 +38,11 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${poppins.variable} ${openSans.variable}`}
       >
-        <header>
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={185}
-            height={58}
-            className={`w-auto p-6 ${globalPaddingClasses}`}
-          />
-        </header>
-        <main>
-          <ClientProviders>{children}</ClientProviders>
-        </main>
+        <ClientProviders>
+          <DeviceUpdater />
+          <GlobalHeader />
+          <main>{children}</main>
+        </ClientProviders>
       </body>
     </html>
   );

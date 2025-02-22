@@ -70,7 +70,9 @@ const PostPreview = ({ id }: PostPreviewProps) => {
               {post?.description}
             </p>
           </header>
-          <SafeHtml html={post.body} />
+          <div className="pb-6 article-body">
+            <SafeHtml html={post.body} />
+          </div>
           <Image
             src={post?.imageUrl}
             alt="example-blog-photo"

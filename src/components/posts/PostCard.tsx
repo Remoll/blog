@@ -3,15 +3,15 @@ import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { categoryLabels, categoryTextColorClasses } from "../categories/consts";
 import formatDate from "@/utils/formatData";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import { mobileBreakpoint } from "@/consts/consts";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface PostCardProps {
   post: Post;
 }
 
 const PostCard = ({ post }: PostCardProps) => {
-  const isMobile = useMediaQuery(mobileBreakpoint);
+  const isMobile = useSelector((state: RootState) => state.device.isMobile);
 
   const categoryLabel = categoryLabels[post.category];
   const createdDate = formatDate(post.createDate);
