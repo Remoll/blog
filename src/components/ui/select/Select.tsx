@@ -20,11 +20,7 @@ const SortSelect: React.FC<SortSelectProps> = ({
 
   return (
     <div className="flex items-center space-x-2 float-right">
-      {label && (
-        <span className="text-2xs text-gray-500 font-open-sans pr-6">
-          {label}
-        </span>
-      )}
+      {label && <span className="text-2xs font-open-sans pr-6">{label}</span>}
       <select
         value={value}
         onChange={handleChange}
