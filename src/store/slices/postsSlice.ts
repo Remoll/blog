@@ -13,7 +13,11 @@ export const fetchPosts = createAsyncThunk(
       }
       return data as Post[];
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue({ error: error.message });
+      }
+
+      return thunkAPI.rejectWithValue({ error: "unhandled error" });
     }
   }
 );
