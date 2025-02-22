@@ -3,19 +3,6 @@
 @tailwind utilities;
 
 body {
+  @apply text-primary;
   font-size: 16px;
-}
-
-h1 {
-  font-family: var(--font-open-sans), sans-serif;
-  font-size: 1.75rem;
-}
-
-h2 {
-  font-family: var(--font-playfair-display), serif;
-}
-
-p {
-  font-family: var(--font-poppins), sans-serif;
-  font-size: 1.125rem
 }

@@ -8,7 +8,7 @@ const Categories = () => {
   const isMobile = useMediaQuery(mobileBreakpoint);
 
   return (
-    <div className={`bg-custom-gray pt-7 pb-12 ${globalPaddingClasses}`}>
+    <div className={`bg-gray-300 pt-7 pb-12 ${globalPaddingClasses}`}>
       {isMobile ? <CategoriesSlider /> : <CategoriesList />}
     </div>
   );

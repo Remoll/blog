@@ -16,7 +16,7 @@ const PostCard = ({ post }: PostCardProps) => {
   const categoryLabel = categoryLabels[post.category];
   const createdDate = formatDate(post.createDate);
   return (
-    <article className="bg-custom-gray rounded-tl-card-md rounded-br-card-md min-h-full py-12 px-8">
+    <article className="bg-gray-300 text-secondary rounded-tl-card-md rounded-br-card-md min-h-full py-12 px-8">
       <header>
         {!isMobile && (
           <p
@@ -30,7 +30,9 @@ const PostCard = ({ post }: PostCardProps) => {
         <h2 className="font-playfair font-black text-5xl leading-loose pb-4">
           {post.title}
         </h2>
-        {isMobile && <div className="border-b border-primary w-[5rem] mb-3" />}
+        {isMobile && (
+          <div className="border-b border-secondary w-[5rem] mb-3" />
+        )}
       </header>
       <time
         className="font-playfair text-2xl font-bold"

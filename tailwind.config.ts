@@ -10,14 +10,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        "custom-gray": "#f4f4f4",
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#1E2C3B",
-        secondary: "#363B5C",
+        primary: "#363B5C",
+        secondary: "#1E2C3B",
+        gray: {
+          300: "#f4f4f4",
+          900: "#1E1E1E",
+          950: "#1F1A17",
+        },
         red: {
           600: "#D94F4F",
           700: "#A02E41",
+          900: "#8E2F3F",
         },
         blue: {
           600: "#444E8D",

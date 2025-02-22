@@ -12,7 +12,7 @@ const DotMarkers = ({ children, currentIndex }: DotMarkersProps) => {
         <div
           key={index}
           className={`w-3 h-3 rounded-full cursor-pointer transition-colors ${
-            index === currentIndex ? "bg-secondary" : "border border-secondary"
+            index === currentIndex ? "bg-primary" : "border border-primary"
           }`}
         />
       ))}

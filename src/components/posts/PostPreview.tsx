@@ -41,7 +41,7 @@ const PostPreview = ({ id }: PostPreviewProps) => {
     <div className={`${globalPaddingClasses} max-w-[75rem]`}>
       <div className="flex flex-col md:flex-row justify-between pt-3">
         <Link href="/" className={`flex items-center pb-6`}>
-          <FaArrowLeft />
+          <FaArrowLeft className="text-black" />
           <span className="text-7xl font-opensans font-bold pl-3">
             Blog Edukacyjny
           </span>
@@ -51,7 +51,7 @@ const PostPreview = ({ id }: PostPreviewProps) => {
             onClick={() => handleSetCategoryFilter()}
             className="flex items-center pb-6"
           >
-            <StarIcon size="2rem" />
+            <StarIcon size="2rem" className="text-gray-900" />
             <span className="text-xl font-opensans font-bold pl-3">
               {isPostFavorive ? "usuń z ulubionych" : "dodaj do ulubionych"}
             </span>
@@ -62,8 +62,8 @@ const PostPreview = ({ id }: PostPreviewProps) => {
         <h1>Pobieranie posta...</h1>
       ) : post ? (
         <article>
-          <header className="pb-6">
-            <h1 className="text-8xl leading-3xloose font-playfair font bold pb-6">
+          <header className="pb-6 text-black sm:text-primary">
+            <h1 className="text-8xl leading-3xloose font-playfair font-bold pb-6">
               {post?.title}
             </h1>
             <p className="text-xs leading-normal font-opensans">
