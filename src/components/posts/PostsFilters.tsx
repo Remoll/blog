@@ -4,9 +4,9 @@ import PostSorter from "../ui/sorter/PostsSorter";
 
 const PostsFilters = () => {
   return (
-    <div className="py-8 overflow-hidden grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2">
+    <div className="py-10 overflow-hidden grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-2 gap-y-6">
       <div className="flex flex-col lg:flex-row lg:items-center order-1 col-start-1">
-        <p className="pr-3 text-4xl font-open-sans">Wpisy</p>
+        <p className="pr-3 text-4xl font-open-sans font-bold">Wpisy</p>
         <CategoryFilter />
       </div>
       <div className="pt-2 order-2 col-start-2 lg:order-3 lg:col-start-3 lg:col-end-5 xl:col-start-4 xl:col-end-6 2xl:col-start-5 2xl:col-end-7">

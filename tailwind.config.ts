@@ -6,6 +6,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["px-4", "md:px-10", "2xl:px-[5rem]"],
   theme: {
     extend: {
       colors: {
@@ -54,6 +55,17 @@ export default {
         "6xl": "1.75rem", // 28px
         "7xl": "2rem", // 32px
         "8xl": "2.19rem", // ~35px
+      },
+      lineHeight: {
+        xtight: "1.05rem", // 16.8px
+        tight: "1.36rem", // 21.69px
+        normal: "1.5625rem", // 25px
+        base: "1.66rem", // 26.54px
+        relaxed: "1.77rem", // 28.31px
+        loose: "1.94rem", // 30.97px
+        xloose: "2.25rem", // 36px
+        "2xloose": "2.38rem", // 38.13px
+        "3xloose": "2.92rem", // 46.66px
       },
     },
   },

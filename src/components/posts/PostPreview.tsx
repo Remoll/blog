@@ -10,6 +10,7 @@ import {
   removePostFromFavorites,
 } from "@/store/slices/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
+import { globalPaddingClasses } from "@/consts/consts";
 
 interface PostPreviewProps {
   id: number;
@@ -37,36 +38,51 @@ const PostPreview = ({ id }: PostPreviewProps) => {
   const StarIcon = isPostFavorive ? FaStar : FaRegStar;
 
   return (
-    <>
-      <Link href="/" className="flex items-center">
-        <FaArrowLeft /> Blog Edukacyjny
-      </Link>
+    <div className={`${globalPaddingClasses} max-w-[75rem]`}>
+      <div className="flex flex-col md:flex-row justify-between pt-3">
+        <Link href="/" className={`flex items-center pb-6`}>
+          <FaArrowLeft />
+          <span className="text-7xl font-opensans font-bold pl-3">
+            Blog Edukacyjny
+          </span>
+        </Link>
+        {post && (
+          <button
+            onClick={() => handleSetCategoryFilter()}
+            className="flex items-center pb-6"
+          >
+            <StarIcon size="2rem" />
+            <span className="text-xl font-opensans font-bold pl-3">
+              {isPostFavorive ? "usuń z ulubionych" : "dodaj do ulubionych"}
+            </span>
+          </button>
+        )}
+      </div>
       {loading ? (
         <h1>Pobieranie posta...</h1>
       ) : post ? (
-        <div>
-          <button
-            onClick={() => handleSetCategoryFilter()}
-            className="flex items-center"
-          >
-            <StarIcon size="2rem" />
-            {isPostFavorive ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
-          </button>
-          <h1>{post?.title}</h1>
-          <p>{post?.description}</p>
+        <article>
+          <header className="pb-6">
+            <h1 className="text-8xl leading-3xloose font-playfair font bold pb-6">
+              {post?.title}
+            </h1>
+            <p className="text-xs leading-normal font-opensans">
+              {post?.description}
+            </p>
+          </header>
           <SafeHtml html={post.body} />
           <Image
             src={post?.imageUrl}
             alt="example-blog-photo"
             width={185}
             height={58}
-            className="object-cover w-full h-[574px] rounded-tl-card-lg rounded-br-card-lg"
+            className="object-cover w-full h-[30rem] rounded-tl-card-lg rounded-br-card-lg pb-6"
           />
-        </div>
+        </article>
       ) : (
         <h1>Nie udało się pobrać posta</h1>
       )}
-    </>
+    </div>
   );
 };
 

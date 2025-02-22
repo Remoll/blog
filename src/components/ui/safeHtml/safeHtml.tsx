@@ -7,7 +7,9 @@ interface SafeHtmlProps {
 
 const SafeHtml = ({ html }: SafeHtmlProps) => {
   const cleanHtml = sanitizeHtml(html);
-  return <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />;
+  return (
+    <div dangerouslySetInnerHTML={{ __html: cleanHtml }} className="pb-6" />
+  );
 };
 
 export default SafeHtml;
