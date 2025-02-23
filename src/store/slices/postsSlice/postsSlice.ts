@@ -1,5 +1,5 @@
 import { Post } from "@/interfaces/posts";
-import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
+import checkIsClientEnv from "@/utils/checkIsClientEnv/checkIsClientEnv";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const favoritesLocalStorageKey = "favorites";

@@ -2,7 +2,7 @@ import { categoriesList } from "./consts";
 import CategoryCard from "./CategoryCard";
 import { CategoryKey } from "@/interfaces/categories";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "@/store/slices/categoriesSlice";
+import { clearCategory, setCategory } from "@/store/slices/categoriesSlice";
 import { RootState } from "@/store/store";
 
 const GetCategories = () => {
@@ -13,7 +13,7 @@ const GetCategories = () => {
 
   const handleSetCategoryFilter = (selectedCategoryKey: CategoryKey) => {
     if (currentCategoryFilter === selectedCategoryKey) {
-      dispatch(setCategory(""));
+      dispatch(clearCategory());
     } else {
       dispatch(setCategory(selectedCategoryKey));
     }

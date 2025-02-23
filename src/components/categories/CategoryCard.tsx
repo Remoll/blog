@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 interface CategoryCardProps {
   category: CategoryCardAttributes;
-  currentCategoryFilter: CategoryKey | "";
+  currentCategoryFilter: CategoryKey | null;
   handleSetCategoryFilter: (key: CategoryKey) => void;
 }
 

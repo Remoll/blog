@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
     "@supabase/supabase-js": "^2.48.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "date-fns": "^4.1.0",
     "next": "15.1.7",
     "react": "^19.0.0",
@@ -23,10 +24,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sanitize-html": "^2.13.0",
+    "@types/testing-library__react": "^10.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",

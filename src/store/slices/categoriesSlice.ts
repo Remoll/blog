@@ -1,22 +1,20 @@
-import { CategoryKey } from "@/interfaces/categories";
-import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CategoryKey } from "@/interfaces/categories";
+import checkIsClientEnv from "@/utils/checkIsClientEnv/checkIsClientEnv";
 
 const categoryLocalStorageKey = "category";
 
-const getInitialCategory = (): CategoryKey | "" => {
+const getInitialCategory = (): CategoryKey | null => {
   if (checkIsClientEnv()) {
     return (
-      (localStorage.getItem(
-        categoryLocalStorageKey
-      ) as unknown as CategoryKey) || ""
+      (localStorage.getItem(categoryLocalStorageKey) as CategoryKey) || null
     );
   }
-  return "";
+  return null;
 };
 
 interface CategoriesState {
-  currentCategory: CategoryKey | "";
+  currentCategory: CategoryKey | null;
 }
 
 const initialState: CategoriesState = {
@@ -24,19 +22,19 @@ const initialState: CategoriesState = {
 };
 
 const categoriesSlice = createSlice({
-  name: "category",
+  name: "categories",
   initialState,
   reducers: {
-    setCategory: (state, action: PayloadAction<CategoryKey | "">) => {
+    setCategory: (state, action: PayloadAction<CategoryKey>) => {
       state.currentCategory = action.payload;
       if (checkIsClientEnv()) {
-        localStorage.setItem(categoryLocalStorageKey, action.payload as string);
+        localStorage.setItem(categoryLocalStorageKey, action.payload);
       }
     },
     clearCategory: (state) => {
-      state.currentCategory = "";
+      state.currentCategory = null;
       if (checkIsClientEnv()) {
-        localStorage.setItem(categoryLocalStorageKey, "");
+        localStorage.removeItem(categoryLocalStorageKey);
       }
     },
   },

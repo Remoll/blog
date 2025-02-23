@@ -1,4 +1,4 @@
-import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
+import checkIsClientEnv from "@/utils/checkIsClientEnv/checkIsClientEnv";
 import { createSlice } from "@reduxjs/toolkit";
 
 const isFavoritesFilterActiveLocalStorageKey = "isFavoritesFilterActive";

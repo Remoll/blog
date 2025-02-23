@@ -4,7 +4,7 @@ import { Post } from "@/interfaces/posts";
 
 const filterPosts = (
   posts: Post[],
-  currentCategory: CategoryKey | "",
+  currentCategory: CategoryKey | null,
   isFavoritesFilterActive: boolean,
   favoritePostsIds: number[]
 ): Post[] => {

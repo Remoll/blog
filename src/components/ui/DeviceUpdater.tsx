@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import useMediaQuery from "@/hooks/useMediaQuery";
+import useMediaQuery from "@/hooks/useMediaQuery/useMediaQuery";
 import { setIsMobile } from "@/store/slices/deviceSlice";
 
 const mobileBreakpoint = "(max-width: 767px)";
