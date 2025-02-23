@@ -3,7 +3,7 @@ import PostCard from "./PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { filterPosts, sortPosts } from "./utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchPosts } from "@/store/slices/postsSlice";
 
 const PostList = () => {
@@ -37,19 +37,29 @@ const PostList = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition, 10));
-      sessionStorage.removeItem("scrollPosition");
-    }
-  }, []);
+  const [isRendered, setIsRendered] = useState(false);
 
   useEffect(() => {
     if (posts.length === 0) {
       dispatch(fetchPosts());
     }
   }, [dispatch, posts.length]);
+
+  useEffect(() => {
+    if (isRendered) {
+      const scrollPosition = sessionStorage.getItem("scrollPosition");
+      if (scrollPosition) {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, parseInt(scrollPosition, 10));
+          sessionStorage.removeItem("scrollPosition");
+        });
+      }
+    }
+  }, [isRendered]);
+
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
 
   if (loading) return <h1>Pobieranie postów...</h1>;
   if (error) return <p>Błąd: {error}</p>;
