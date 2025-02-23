@@ -1,5 +1,3 @@
-Vercel hosting: https://blog-chi-pearl.vercel.app/
-
 # Blog Application
 
 This is a modern, full-stack blog application built with Next.js 15, React 19, and TypeScript. The application is designed with a focus on performance, SEO, and best practices. It leverages Supabase as its backend database and fetches posts on the server-side for optimal performance and SEO benefits. You can view the live hosted application at: [https://blog-chi-pearl.vercel.app/](https://blog-chi-pearl.vercel.app/).
