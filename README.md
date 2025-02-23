@@ -94,6 +94,22 @@ Data is fetched on the server for optimal performance and SEO. The API calls are
 
 By fetching posts on the server (using SSR or SSG) and hydrating the initial state in Redux, the application delivers pre-rendered HTML to search engines, improving SEO. At the same time, client-side interactivity (like filtering, sorting, and managing favorites) is handled seamlessly without sacrificing performance.
 
+## Storybook
+
+This project uses Storybook for developing and testing UI components in isolation. Storybook provides a convenient way to visualize and interact with components.
+
+```bash
+   npm run storybook
+```
+
+or
+
+```bash
+yarn storybook
+```
+
+Storybook will be available at http://localhost:6006
+
 ## Contributing
 
 Contributions are welcome! Please feel free to open issues or submit pull requests for improvements and bug fixes.
