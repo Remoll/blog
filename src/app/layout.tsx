@@ -4,6 +4,7 @@ import "./globals.css";
 import ClientProviders from "@/components/providers/ClientProviders";
 import GlobalHeader from "@/components/ui/GlobalHeader";
 import DeviceUpdater from "@/components/ui/DeviceUpdater";
+import { ToastContainer } from "react-toastify";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
@@ -40,6 +41,7 @@ export default function RootLayout({
       >
         <ClientProviders>
           <DeviceUpdater />
+          <ToastContainer position="top-right" autoClose={5000} />
           <GlobalHeader />
           <main>{children}</main>
         </ClientProviders>

@@ -62,7 +62,8 @@ const PostList = () => {
   }, []);
 
   if (loading) return <h1>Pobieranie postów...</h1>;
-  if (error) return <p>Błąd: {error}</p>;
+  if (error) return <h1>Błąd: {error}</h1>;
+  if (sortedPosts.length < 1) return <h1>Nie znaleziono postów</h1>;
 
   return (
     <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

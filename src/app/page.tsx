@@ -12,7 +12,7 @@ const Home = () => {
         Blog edukacyjny
       </h1>
       <Categories />
-      <div className={globalPaddingClasses}>
+      <div className={`${globalPaddingClasses} pb-[30rem]`}>
         <PostsFilters />
         <PostsList />
       </div>
