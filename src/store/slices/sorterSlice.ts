@@ -1,8 +1,9 @@
 import { SortOrder } from "@/interfaces/common";
+import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice } from "@reduxjs/toolkit";
 
 const getInitialState = (): SortOrder => {
-  if (typeof window !== "undefined") {
+  if (checkIsClientEnv()) {
     const localStorageValue = localStorage.getItem("postSorter");
 
     if (!localStorageValue) {
@@ -28,7 +29,7 @@ const sorterSlice = createSlice({
   reducers: {
     setPostSorterValue: (state, actions) => {
       state.postSorter = actions.payload;
-      if (typeof window !== "undefined") {
+      if (checkIsClientEnv()) {
         localStorage.setItem("postSorter", actions.payload);
       }
     },

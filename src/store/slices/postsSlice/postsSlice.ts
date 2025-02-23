@@ -1,4 +1,5 @@
 import { Post } from "@/interfaces/posts";
+import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
@@ -45,7 +46,7 @@ export const fetchPostById = createAsyncThunk<
 });
 
 const getInitialFavorites = (): number[] => {
-  if (typeof window !== "undefined") {
+  if (checkIsClientEnv()) {
     const jsonFavorites = localStorage.getItem("favorites");
     if (!jsonFavorites) {
       return [];
@@ -81,7 +82,7 @@ const postsSlice = createSlice({
   reducers: {
     addPostToFavorites: (state, action: PayloadAction<number>) => {
       state.favorites.push(action.payload);
-      if (typeof window !== "undefined") {
+      if (checkIsClientEnv()) {
         localStorage.setItem("favorites", JSON.stringify(state.favorites));
       }
     },
@@ -89,7 +90,7 @@ const postsSlice = createSlice({
       state.favorites = state.favorites.filter(
         (postId) => postId !== action.payload
       );
-      if (typeof window !== "undefined") {
+      if (checkIsClientEnv()) {
         localStorage.setItem("favorites", JSON.stringify(state.favorites));
       }
     },

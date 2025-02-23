@@ -1,7 +1,8 @@
+import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice } from "@reduxjs/toolkit";
 
 const getInitialState = (): boolean => {
-  if (typeof window !== "undefined") {
+  if (checkIsClientEnv()) {
     const localStorageValue = localStorage.getItem("isFavoritesFilterActive");
 
     if (!localStorageValue) {
@@ -29,14 +30,14 @@ const filtersSlice = createSlice({
   reducers: {
     activeFavotiresFilter: (state) => {
       state.isFavoritesFilterActive = true;
-      if (typeof window !== "undefined") {
+      if (checkIsClientEnv()) {
         const json = JSON.stringify(true);
         localStorage.setItem("isFavoritesFilterActive", json);
       }
     },
     disableFavotiresFilter: (state) => {
       state.isFavoritesFilterActive = false;
-      if (typeof window !== "undefined") {
+      if (checkIsClientEnv()) {
         const json = JSON.stringify(false);
         localStorage.setItem("isFavoritesFilterActive", json);
       }

@@ -2,7 +2,7 @@ import { Post } from "@/interfaces/posts";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { categoryLabels, categoryTextColorClasses } from "../categories/consts";
-import formatDate from "@/utils/formatDate";
+import formatDate from "@/utils/formatDate/formatDate";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
