@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { setPostSorterValue } from "@/store/slices/sorterSlice";
+import translations from "@/locates/pl/translations.json";
 
 const options: SelectOption[] = [
-  { value: SortOrder.newest, label: "Najnowsze wpisy" },
-  { value: SortOrder.oldest, label: "Najstarsze wpisy" },
+  { value: SortOrder.newest, label: translations["entriesLatest"] },
+  { value: SortOrder.oldest, label: translations["oldestLatest"] },
 ];
 
 const PostSorter = () => {
@@ -31,7 +32,7 @@ const PostSorter = () => {
   return (
     <Select
       options={options}
-      label={isMobile ? undefined : "pokaż od:"}
+      label={isMobile ? undefined : `${translations["showFrom"]}:`}
       value={postSorterValue}
       onChange={(newValue) => dispatch(setPostSorterValue(newValue))}
     />

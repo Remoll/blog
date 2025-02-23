@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
 import Image from "next/image";
 import { globalPaddingClasses } from "@/consts/consts";
+import translations from "@/locates/pl/translations.json";
 
 const GlobalHeader: React.FC = () => {
   const isMobile = useSelector((state: RootState) => state.device.isMobile);
@@ -20,7 +21,7 @@ const GlobalHeader: React.FC = () => {
       {!isMobile && (
         <div className="mb-3">
           <p className="text-2xs font-bold font-opensans uppercase pb-4">
-            - Blog
+            {`- ${translations["blog"]}`}
           </p>
           <div className="border-b border-gray-400 w-full" />
         </div>

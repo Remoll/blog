@@ -2,11 +2,11 @@ import { Post } from "@/interfaces/posts";
 import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const favoritesLocaStorageKey = "favorites";
+const favoritesLocalStorageKey = "favorites";
 
 const getInitialFavorites = (): number[] => {
   if (checkIsClientEnv()) {
-    const jsonFavorites = localStorage.getItem(favoritesLocaStorageKey);
+    const jsonFavorites = localStorage.getItem(favoritesLocalStorageKey);
     if (!jsonFavorites) {
       return [];
     }
@@ -36,7 +36,7 @@ const postsSlice = createSlice({
       state.favorites.push(action.payload);
       if (checkIsClientEnv()) {
         localStorage.setItem(
-          favoritesLocaStorageKey,
+          favoritesLocalStorageKey,
           JSON.stringify(state.favorites)
         );
       }
@@ -47,7 +47,7 @@ const postsSlice = createSlice({
       );
       if (checkIsClientEnv()) {
         localStorage.setItem(
-          favoritesLocaStorageKey,
+          favoritesLocalStorageKey,
           JSON.stringify(state.favorites)
         );
       }

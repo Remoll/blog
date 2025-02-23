@@ -5,6 +5,7 @@ import { categoryLabels, categoryTextColorClasses } from "../categories/consts";
 import formatDate from "@/utils/formatDate/formatDate";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import translations from "@/locates/pl/translations.json";
 
 interface PostCardProps {
   post: Post;
@@ -53,7 +54,9 @@ const PostCard = ({ post }: PostCardProps) => {
         className="flex items-center"
         onClick={handleLinkClick}
       >
-        <span className="font-bold text-base pr-3">zobacz więcej</span>
+        <span className="font-bold text-base pr-3">
+          {translations["seeMore"]}
+        </span>
         <FaArrowRight />
       </Link>
     </article>

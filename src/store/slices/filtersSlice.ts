@@ -1,9 +1,13 @@
 import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice } from "@reduxjs/toolkit";
 
+const isFavoritesFilterActiveLocalStorageKey = "isFavoritesFilterActive";
+
 const getInitialState = (): boolean => {
   if (checkIsClientEnv()) {
-    const localStorageValue = localStorage.getItem("isFavoritesFilterActive");
+    const localStorageValue = localStorage.getItem(
+      isFavoritesFilterActiveLocalStorageKey
+    );
 
     if (!localStorageValue) {
       return false;
@@ -32,14 +36,14 @@ const filtersSlice = createSlice({
       state.isFavoritesFilterActive = true;
       if (checkIsClientEnv()) {
         const json = JSON.stringify(true);
-        localStorage.setItem("isFavoritesFilterActive", json);
+        localStorage.setItem(isFavoritesFilterActiveLocalStorageKey, json);
       }
     },
     disableFavotiresFilter: (state) => {
       state.isFavoritesFilterActive = false;
       if (checkIsClientEnv()) {
         const json = JSON.stringify(false);
-        localStorage.setItem("isFavoritesFilterActive", json);
+        localStorage.setItem(isFavoritesFilterActiveLocalStorageKey, json);
       }
     },
   },

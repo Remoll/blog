@@ -11,6 +11,7 @@ import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
 import Link from "next/link";
 import { Post } from "@/interfaces/posts";
+import translations from "@/locates/pl/translations.json";
 
 interface PostPreviewProps {
   post: Post;
@@ -41,7 +42,7 @@ const PostPreview = ({ post }: PostPreviewProps) => {
         <Link href={{ pathname: `/` }} className={`flex items-center pb-6`}>
           <FaArrowLeft className="text-black" />
           <span className="text-7xl font-opensans font-bold pl-3">
-            Blog Edukacyjny
+            {translations["educationalBlog"]}
           </span>
         </Link>
         <button
@@ -50,7 +51,9 @@ const PostPreview = ({ post }: PostPreviewProps) => {
         >
           <StarIcon size="2rem" className="text-gray-900" />
           <span className="text-xl font-opensans font-bold pl-3">
-            {isPostFavorive ? "usuń z ulubionych" : "dodaj do ulubionych"}
+            {isPostFavorive
+              ? translations["favoritesRemove"]
+              : translations["favoritesAdd"]}
           </span>
         </button>
       </div>

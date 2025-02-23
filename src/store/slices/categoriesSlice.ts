@@ -2,9 +2,15 @@ import { CategoryKey } from "@/interfaces/categories";
 import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const categoryLocalStorageKey = "category";
+
 const getInitialCategory = (): CategoryKey | "" => {
   if (checkIsClientEnv()) {
-    return (localStorage.getItem("category") as unknown as CategoryKey) || "";
+    return (
+      (localStorage.getItem(
+        categoryLocalStorageKey
+      ) as unknown as CategoryKey) || ""
+    );
   }
   return "";
 };
@@ -24,13 +30,13 @@ const categoriesSlice = createSlice({
     setCategory: (state, action: PayloadAction<CategoryKey | "">) => {
       state.currentCategory = action.payload;
       if (checkIsClientEnv()) {
-        localStorage.setItem("category", action.payload as string);
+        localStorage.setItem(categoryLocalStorageKey, action.payload as string);
       }
     },
     clearCategory: (state) => {
       state.currentCategory = "";
       if (checkIsClientEnv()) {
-        localStorage.setItem("category", "");
+        localStorage.setItem(categoryLocalStorageKey, "");
       }
     },
   },

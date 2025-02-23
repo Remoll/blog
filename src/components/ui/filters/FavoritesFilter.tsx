@@ -6,6 +6,7 @@ import {
   disableFavotiresFilter,
 } from "@/store/slices/filtersSlice";
 import { useEffect, useState } from "react";
+import translations from "@/locates/pl/translations.json";
 
 const FavoritesFilter = () => {
   const [mounted, setMounted] = useState(false);
@@ -33,7 +34,7 @@ const FavoritesFilter = () => {
           !isFavoritesFilterActive ? activeClasses : inactiveClasses
         } uppercase pr-5`}
       >
-        Wszystkie
+        {translations["all"]}
       </button>
       <span className="text-red-900 font-bold">/</span>
       <button
@@ -42,7 +43,7 @@ const FavoritesFilter = () => {
           isFavoritesFilterActive ? activeClasses : inactiveClasses
         } uppercase pl-2`}
       >
-        Ulubione
+        {translations["favorites"]}
       </button>
     </div>
   );

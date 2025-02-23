@@ -3,12 +3,13 @@ import {
   CategoryTextColor,
   CategoryKey,
 } from "@/interfaces/categories";
+import translations from "@/locates/pl/translations.json";
 
 const categoryLabels: Record<CategoryKey, string> = {
-  [CategoryKey.knowledge]: "Wiedza",
-  [CategoryKey.inspirations]: "Inspiracje",
-  [CategoryKey.interpretations]: "Interpretacje",
-  [CategoryKey.accessible]: "Dostępne",
+  [CategoryKey.knowledge]: translations["knowledge"],
+  [CategoryKey.inspirations]: translations["inspirations"],
+  [CategoryKey.interpretations]: translations["interpretations"],
+  [CategoryKey.accessible]: translations["accessible"],
 };
 
 const categoriesList: CategoryCardAttributes[] = [

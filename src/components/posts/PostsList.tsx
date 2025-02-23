@@ -9,6 +9,7 @@ import Categories from "../categories/Categories";
 import { globalPaddingClasses } from "@/consts/consts";
 import { Post } from "@/interfaces/posts";
 import { setPosts } from "@/store/slices/postsSlice/postsSlice";
+import translations from "@/locates/pl/translations.json";
 
 interface PostList {
   initialPosts: Post[];
@@ -73,7 +74,7 @@ const PostList = ({ initialPosts }: PostList) => {
       <h1
         className={`${globalPaddingClasses} pt-6 pb-12 font-bold text-6xl sm:text-7xl`}
       >
-        Blog edukacyjny
+        {translations["educationalBlog"]}
       </h1>
       <Categories />
       <div className={`${globalPaddingClasses} pb-[30rem]`}>
@@ -88,7 +89,7 @@ const PostList = ({ initialPosts }: PostList) => {
             ))}
           </ul>
         ) : (
-          <h1>Brak postów do wyświetlenia</h1>
+          <h1>{translations["emptyPostsList"]}</h1>
         )}
       </div>
     </>

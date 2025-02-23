@@ -1,4 +1,5 @@
 import { FetchResponse } from "@/interfaces/common";
+import translations from "@/locates/pl/translations.json";
 
 const fetchData = async <T>(url: string): Promise<FetchResponse<T>> => {
   try {
@@ -7,7 +8,7 @@ const fetchData = async <T>(url: string): Promise<FetchResponse<T>> => {
     if (!response.ok) {
       return {
         data: null,
-        error: `Błąd HTTP: ${response.status} - ${response.statusText}`,
+        error: `${translations["errorHttp"]}: ${response.status} - ${response.statusText}`,
       };
     }
 
@@ -20,9 +21,9 @@ const fetchData = async <T>(url: string): Promise<FetchResponse<T>> => {
     return { data, error: null };
   } catch (err) {
     if (err instanceof Error) {
-      return { data: null, error: err.message || "Wystąpił nieznany błąd" };
+      return { data: null, error: err.message || translations["errorUnknown"] };
     }
-    return { data: null, error: "Wystąpił nieznany błąd" };
+    return { data: null, error: translations["errorUnknown"] };
   }
 };
 

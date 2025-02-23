@@ -5,6 +5,7 @@ import ClientProviders from "@/components/providers/ClientProviders";
 import GlobalHeader from "@/components/ui/GlobalHeader";
 import DeviceUpdater from "@/components/ui/DeviceUpdater";
 import { ToastContainer } from "react-toastify";
+import translations from "@/locates/pl/translations.json";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
@@ -25,8 +26,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "An educational blog for studying art history",
+  title: translations["appName"],
+  description: translations["appDescription"],
 };
 
 export default function RootLayout({
