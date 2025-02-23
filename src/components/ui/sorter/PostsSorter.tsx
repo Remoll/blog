@@ -9,7 +9,7 @@ import translations from "@/locates/pl/translations.json";
 
 const options: SelectOption[] = [
   { value: SortOrder.newest, label: translations["entriesLatest"] },
-  { value: SortOrder.oldest, label: translations["oldestLatest"] },
+  { value: SortOrder.oldest, label: translations["entriesOldest"] },
 ];
 
 const PostSorter = () => {
