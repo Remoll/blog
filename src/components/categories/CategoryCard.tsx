@@ -8,7 +8,7 @@ import {
 } from "./consts";
 import { useEffect, useState } from "react";
 
-interface CategoryCardProps {
+export interface CategoryCardProps {
   category: CategoryCardAttributes;
   currentCategoryFilter: CategoryKey | null;
   handleSetCategoryFilter: (key: CategoryKey) => void;

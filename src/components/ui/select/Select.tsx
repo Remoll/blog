@@ -1,19 +1,14 @@
 import { SelectOption } from "@/interfaces/common";
 import React, { ChangeEvent } from "react";
 
-interface SortSelectProps {
+interface SelectProps {
   value: string;
   onChange: (value: string) => void;
   options: SelectOption[];
   label?: string;
 }
 
-const SortSelect: React.FC<SortSelectProps> = ({
-  value,
-  onChange,
-  options,
-  label,
-}) => {
+const Select: React.FC<SelectProps> = ({ value, onChange, options, label }) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onChange(event.target.value);
   };
@@ -40,4 +35,4 @@ const SortSelect: React.FC<SortSelectProps> = ({
   );
 };
 
-export default SortSelect;
+export default Select;

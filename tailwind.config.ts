@@ -5,6 +5,7 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./.storybook/**/*.{js,jsx,ts,tsx}",
   ],
   safelist: ["px-4", "md:px-10", "2xl:px-[5rem]"],
   theme: {
@@ -76,4 +77,5 @@ export default {
     },
   },
   plugins: [],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
 } satisfies Config;
