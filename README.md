@@ -26,16 +26,19 @@ This is a modern, full-stack blog application built with Next.js 15, React 19, a
    ```bash
    git clone https://github.com/Remoll/blog.git
    cd blog
-
    ```
 
 2. **Install dependencies:**
 
+   ```bash
    npm install
+   ```
 
-   # or
+   or
 
+   ```bash
    yarn install
+   ```
 
 3. **Configure Environment Variables:**
 
@@ -45,11 +48,15 @@ This is a modern, full-stack blog application built with Next.js 15, React 19, a
 
 4. **Run the development server:**
 
+   ```bash
    npm run dev
+   ```
 
-   # or
+   or
 
+   ```bash
    yarn dev
+   ```
 
 The application should now be running at http://localhost:3000.
 
