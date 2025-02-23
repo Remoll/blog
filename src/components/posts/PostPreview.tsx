@@ -1,31 +1,42 @@
 "use client";
-import useFetchPost from "@/hooks/posts/useFetchPost";
+// import useFetchPost from "@/hooks/posts/useFetchPost";
 import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/store/store";
 import {
   addPostToFavorites,
+  fetchPostById,
   removePostFromFavorites,
 } from "@/store/slices/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface PostPreviewProps {
   id: number;
 }
 
 const PostPreview = ({ id }: PostPreviewProps) => {
-  const { post, loading } = useFetchPost(id);
+  // const { post, loading } = useFetchPost(id);
 
   const router = useRouter();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const favoritesPosts = useSelector(
-    (state: RootState) => state.posts.favorites
-  );
+  const {
+    favorites: favoritesPosts,
+    postsListDetailed,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.posts);
+
+  const post = postsListDetailed.find((post) => post.id === id);
+
+  // const favoritesPosts = useSelector(
+  //   (state: RootState) => state.posts.favorites
+  // );
 
   const isPostFavorive = favoritesPosts.includes(id);
 
@@ -38,6 +49,13 @@ const PostPreview = ({ id }: PostPreviewProps) => {
   };
 
   const StarIcon = isPostFavorive ? FaStar : FaRegStar;
+
+  useEffect(() => {
+    if (!post) {
+      console.log("cooooo");
+      dispatch(fetchPostById(id));
+    }
+  }, [dispatch, post, id]);
 
   return (
     <div className={`${globalPaddingClasses} max-w-[75rem]`}>

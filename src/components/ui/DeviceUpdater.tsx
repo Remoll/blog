@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { setIsMobile } from "@/store/slices/deviceSlice";
-import { mobileBreakpoint } from "@/consts/consts";
+
+const mobileBreakpoint = "(max-width: 767px)";
 
 const DeviceUpdater: React.FC = () => {
   const dispatch = useDispatch();

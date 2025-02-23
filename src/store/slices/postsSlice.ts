@@ -1,6 +1,7 @@
-import { postsURL } from "@/hooks/posts/consts";
 import { Post } from "@/interfaces/posts";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+const postsURL = "/api/posts";
 
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
@@ -12,6 +13,26 @@ export const fetchPosts = createAsyncThunk(
         return thunkAPI.rejectWithValue({ error: data.error });
       }
       return data as Post[];
+    } catch (error) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue({ error: error.message });
+      }
+
+      return thunkAPI.rejectWithValue({ error: "unhandled error" });
+    }
+  }
+);
+
+export const fetchPostById = createAsyncThunk(
+  "posts/fetchPostsById",
+  async (postId: number, thunkAPI) => {
+    try {
+      const response = await fetch(`${postsURL}/${postId}`);
+      const data = await response.json();
+      if (data.error) {
+        return thunkAPI.rejectWithValue({ error: data.error });
+      }
+      return data as Post;
     } catch (error) {
       if (error instanceof Error) {
         return thunkAPI.rejectWithValue({ error: error.message });
@@ -40,6 +61,7 @@ const getInitialFavorites = (): number[] => {
 
 interface PostsState {
   postsList: Post[];
+  postsListDetailed: Post[];
   favorites: number[];
   loading: boolean;
   error: string | null;
@@ -48,6 +70,7 @@ interface PostsState {
 const initialState: PostsState = {
   favorites: getInitialFavorites(),
   postsList: [],
+  postsListDetailed: [],
   loading: true,
   error: null,
 };
@@ -88,6 +111,33 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
         state.postsList = [];
+        //TODO: do poprawy
+        const errorMessage = (action.payload as { error: string }).error;
+        state.error = errorMessage || "Error fetching posts";
+      })
+      .addCase(fetchPostById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchPostById.fulfilled,
+        (state, action: PayloadAction<Post>) => {
+          const newPost = action.payload;
+          const postExistInStore = state.postsListDetailed.some(
+            (post) => post.id === newPost.id
+          );
+          if (postExistInStore) {
+            state.postsListDetailed = state.postsListDetailed.map((post) =>
+              post.id === newPost.id ? newPost : post
+            );
+          } else {
+            state.postsListDetailed.push(newPost);
+          }
+          state.loading = false;
+        }
+      )
+      .addCase(fetchPostById.rejected, (state, action) => {
+        state.loading = false;
         //TODO: do poprawy
         const errorMessage = (action.payload as { error: string }).error;
         state.error = errorMessage || "Error fetching posts";
