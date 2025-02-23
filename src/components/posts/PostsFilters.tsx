@@ -1,6 +1,6 @@
 import CategoryFilter from "../ui/filters/CategoryFilter";
 import FavoritesFilter from "../ui/filters/FavoritesFilter";
-import PostSorter from "../ui/sorter/PostsSorter";
+import PostSorter from "./PostsSorter";
 import translations from "@/locates/pl/translations.json";
 
 const PostsFilters = () => {

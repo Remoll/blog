@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   activeFavotiresFilter,
   disableFavotiresFilter,
-} from "@/store/slices/filtersSlice";
+} from "@/store/slices/filtersSlice/filtersSlice";
 import { useEffect, useState } from "react";
 import translations from "@/locates/pl/translations.json";
 

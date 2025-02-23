@@ -6,7 +6,7 @@ import {
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
-import { clearCategory } from "@/store/slices/categoriesSlice";
+import { clearCategory } from "@/store/slices/categoriesSlice/categoriesSlice";
 import { useEffect, useState } from "react";
 
 const CategoryFilter = () => {

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import categoriesReducer from "./slices/categoriesSlice";
+import categoriesReducer from "./slices/categoriesSlice/categoriesSlice";
 import postsReducer from "./slices/postsSlice/postsSlice";
-import filtersReducer from "./slices/filtersSlice";
-import sorterReducer from "./slices/sorterSlice";
-import deviceReducer from "./slices/deviceSlice";
+import filtersReducer from "./slices/filtersSlice/filtersSlice";
+import sorterReducer from "./slices/sorterSlice/sorterSlice";
+import deviceReducer from "./slices/deviceSlice/deviceSlice";
 
 const store = configureStore({
   reducer: {

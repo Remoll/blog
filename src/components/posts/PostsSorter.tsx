@@ -1,10 +1,10 @@
 "use client";
 import { SelectOption, SortOrder } from "@/interfaces/common";
-import Select from "../select/Select";
+import Select from "../ui/select/Select";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { setPostSorterValue } from "@/store/slices/sorterSlice";
+import { setPostSorterValue } from "@/store/slices/sorterSlice/sorterSlice";
 import translations from "@/locates/pl/translations.json";
 
 const options: SelectOption[] = [

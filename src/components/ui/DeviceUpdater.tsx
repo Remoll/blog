@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useMediaQuery from "@/hooks/useMediaQuery/useMediaQuery";
-import { setIsMobile } from "@/store/slices/deviceSlice";
+import { setIsMobile } from "@/store/slices/deviceSlice/deviceSlice";
 
 const mobileBreakpoint = "(max-width: 767px)";
 

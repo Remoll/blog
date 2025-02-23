@@ -2,7 +2,10 @@ import { categoriesList } from "./consts";
 import CategoryCard from "./CategoryCard";
 import { CategoryKey } from "@/interfaces/categories";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCategory, setCategory } from "@/store/slices/categoriesSlice";
+import {
+  clearCategory,
+  setCategory,
+} from "@/store/slices/categoriesSlice/categoriesSlice";
 import { RootState } from "@/store/store";
 
 const GetCategories = () => {
