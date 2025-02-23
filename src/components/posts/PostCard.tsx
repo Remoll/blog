@@ -15,6 +15,11 @@ const PostCard = ({ post }: PostCardProps) => {
 
   const categoryLabel = categoryLabels[post.category];
   const createdDate = formatDate(post.createDate);
+
+  const handleLinkClick = () => {
+    sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+  };
+
   return (
     <article className="bg-gray-300 text-secondary rounded-tl-card-md rounded-br-card-md min-h-full py-12 px-8">
       <header>
@@ -43,7 +48,11 @@ const PostCard = ({ post }: PostCardProps) => {
       <p className="font-opensans text-base leading-base py-4">
         {post.description}
       </p>
-      <Link href={{ pathname: `/${post.id}` }} className="flex items-center">
+      <Link
+        href={{ pathname: `/${post.id}` }}
+        className="flex items-center"
+        onClick={handleLinkClick}
+      >
         <span className="font-bold text-base pr-3">zobacz więcej</span>
         <FaArrowRight />
       </Link>

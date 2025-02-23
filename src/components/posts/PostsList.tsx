@@ -38,6 +38,14 @@ const PostList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    const scrollPosition = sessionStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem("scrollPosition");
+    }
+  }, []);
+
+  useEffect(() => {
     if (posts.length === 0) {
       dispatch(fetchPosts());
     }

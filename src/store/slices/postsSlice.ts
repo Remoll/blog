@@ -27,7 +27,7 @@ export const fetchPostById = createAsyncThunk(
   "posts/fetchPostsById",
   async (postId: number, thunkAPI) => {
     try {
-      const response = await fetch(`${postsURL}/${111}`);
+      const response = await fetch(`${postsURL}/${postId}`);
       const data = await response.json();
       if (data.error) {
         return thunkAPI.rejectWithValue({ error: data.error });

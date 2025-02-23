@@ -1,5 +1,4 @@
 "use client";
-// import useFetchPost from "@/hooks/posts/useFetchPost";
 import { FaArrowLeft, FaRegStar, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,18 +10,14 @@ import {
 } from "@/store/slices/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Link from "next/link";
 
 interface PostPreviewProps {
   id: number;
 }
 
 const PostPreview = ({ id }: PostPreviewProps) => {
-  // const { post, loading } = useFetchPost(id);
-
-  const router = useRouter();
-
   const dispatch = useDispatch<AppDispatch>();
 
   const {
@@ -33,10 +28,6 @@ const PostPreview = ({ id }: PostPreviewProps) => {
   } = useSelector((state: RootState) => state.posts);
 
   const post = postsDetailed.find((post) => post.id === id);
-
-  // const favoritesPosts = useSelector(
-  //   (state: RootState) => state.posts.favorites
-  // );
 
   const isPostFavorive = favoritesPosts.includes(id);
 
@@ -59,16 +50,12 @@ const PostPreview = ({ id }: PostPreviewProps) => {
   return (
     <div className={`${globalPaddingClasses} max-w-[75rem]`}>
       <div className="flex flex-col md:flex-row justify-between pt-3">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className={`flex items-center pb-6`}
-        >
+        <Link href={{ pathname: `/` }} className={`flex items-center pb-6`}>
           <FaArrowLeft className="text-black" />
           <span className="text-7xl font-opensans font-bold pl-3">
             Blog Edukacyjny
           </span>
-        </button>
+        </Link>
         {post && (
           <button
             onClick={() => handleSetCategoryFilter()}
@@ -83,7 +70,7 @@ const PostPreview = ({ id }: PostPreviewProps) => {
       </div>
       {loading ? (
         <h1>Pobieranie posta...</h1>
-      ) : post ? (
+      ) : !error && post ? (
         <article>
           <header className="pb-6 text-black sm:text-primary">
             <h1 className="text-8xl leading-3xloose font-playfair font-bold pb-6">
@@ -105,7 +92,10 @@ const PostPreview = ({ id }: PostPreviewProps) => {
           />
         </article>
       ) : (
-        <h1>Nie udało się pobrać posta</h1>
+        <>
+          <h1>Nie udało się pobrać posta</h1>
+          <h2>{error}</h2>
+        </>
       )}
     </div>
   );
