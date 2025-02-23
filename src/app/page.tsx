@@ -1,23 +1,10 @@
-import PostsList from "@/components/posts/PostsList";
-import Categories from "@/components/categories/Categories";
-import PostsFilters from "@/components/posts/PostsFilters";
-import { globalPaddingClasses } from "@/consts/consts";
+import PostsListResolver from "@/components/posts/PostListResolver";
+import { fetchPosts } from "@/services/posts";
 
-const Home = () => {
-  return (
-    <>
-      <h1
-        className={`${globalPaddingClasses} pt-6 pb-12 font-bold text-6xl sm:text-7xl`}
-      >
-        Blog edukacyjny
-      </h1>
-      <Categories />
-      <div className={`${globalPaddingClasses} pb-[30rem]`}>
-        <PostsFilters />
-        <PostsList />
-      </div>
-    </>
-  );
+const PostsPage = async () => {
+  const response = await fetchPosts();
+
+  return <PostsListResolver fetchPostsResponse={response} />;
 };
 
-export default Home;
+export default PostsPage;

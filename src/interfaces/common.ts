@@ -8,4 +8,16 @@ enum SortOrder {
   oldest = "oldest",
 }
 
-export { type SelectOption, SortOrder };
+interface SuccessResponse<T> {
+  data: T;
+  error: null;
+}
+
+interface FailedResponse {
+  data: null;
+  error: string;
+}
+
+type FetchResponse<T> = SuccessResponse<T> | FailedResponse;
+
+export { type SelectOption, SortOrder, type FetchResponse };

@@ -4,23 +4,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { filterPosts, sortPosts } from "./utils";
 import { useEffect, useState } from "react";
-import { fetchPosts } from "@/store/slices/postsSlice/postsSlice";
+import PostsFilters from "./PostsFilters";
+import Categories from "../categories/Categories";
+import { globalPaddingClasses } from "@/consts/consts";
+import { Post } from "@/interfaces/posts";
+import { setPosts } from "@/store/slices/postsSlice/postsSlice";
 
-const PostList = () => {
+interface PostList {
+  initialPosts: Post[];
+}
+
+const PostList = ({ initialPosts }: PostList) => {
   const currentCategoryFilter = useSelector(
     (state: RootState) => state.categories.currentCategory
   );
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { favorites: favoritesPosts, posts } = useSelector(
+    (state: RootState) => state.posts
+  );
+
+  useEffect(() => {
+    if (posts.length === 0 && initialPosts?.length > 0) {
+      dispatch(setPosts(initialPosts));
+    }
+  }, [dispatch, posts.length, initialPosts]);
+
   const isFavoritesFilterActive = useSelector(
     (state: RootState) => state.filters.isFavoritesFilterActive
   );
-
-  const {
-    favorites: favoritesPosts,
-    posts,
-    postsLoading: loading,
-    postsError: error,
-  } = useSelector((state: RootState) => state.posts);
 
   const postSorterValue = useSelector(
     (state: RootState) => state.sorter.postSorter
@@ -35,15 +48,7 @@ const PostList = () => {
 
   const sortedPosts = sortPosts(filteredPosts, postSorterValue);
 
-  const dispatch = useDispatch<AppDispatch>();
-
   const [isRendered, setIsRendered] = useState(false);
-
-  useEffect(() => {
-    if (posts.length === 0) {
-      dispatch(fetchPosts());
-    }
-  }, [dispatch, posts.length]);
 
   useEffect(() => {
     if (isRendered) {
@@ -61,18 +66,27 @@ const PostList = () => {
     setIsRendered(true);
   }, []);
 
-  if (loading) return <h1>Pobieranie postów...</h1>;
-  if (error) return <h1>Błąd: {error}</h1>;
-  if (sortedPosts.length < 1) return <h1>Nie znaleziono postów</h1>;
+  if (sortedPosts.length < 1) return <h1>Brak postów do wyświetlenia</h1>;
 
   return (
-    <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {sortedPosts.map((post) => (
-        <li key={post.id}>
-          <PostCard post={post} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <h1
+        className={`${globalPaddingClasses} pt-6 pb-12 font-bold text-6xl sm:text-7xl`}
+      >
+        Blog edukacyjny
+      </h1>
+      <Categories />
+      <div className={`${globalPaddingClasses} pb-[30rem]`}>
+        <PostsFilters />
+        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {sortedPosts.map((post) => (
+            <li key={post.id}>
+              <PostCard post={post} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

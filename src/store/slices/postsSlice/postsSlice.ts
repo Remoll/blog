@@ -1,29 +1,7 @@
+import { postsURL } from "@/consts/consts";
 import { Post } from "@/interfaces/posts";
 import checkIsClientEnv from "@/utils/checkIsClientEnv.ts/checkIsClientEnv";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-
-const postsURL = "/api/posts";
-
-export const fetchPosts = createAsyncThunk<
-  Post[],
-  void,
-  { rejectValue: { error: string } }
->("posts/fetchPosts", async (_, thunkAPI) => {
-  try {
-    const response = await fetch(postsURL);
-    const data = await response.json();
-    if (data.error) {
-      return thunkAPI.rejectWithValue({ error: data.error });
-    }
-    return data as Post[];
-  } catch (error) {
-    if (error instanceof Error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
-    }
-    return thunkAPI.rejectWithValue({ error: "Unhandled error" });
-  }
-});
 
 export const fetchPostById = createAsyncThunk<
   Post,
@@ -58,8 +36,6 @@ const getInitialFavorites = (): number[] => {
 
 interface PostsState {
   posts: Post[];
-  postsLoading: boolean;
-  postsError: string | null;
   postsDetailed: Post[];
   postsDetailedLoading: boolean;
   postsDetailedError: string | null;
@@ -69,8 +45,6 @@ interface PostsState {
 const initialState: PostsState = {
   favorites: getInitialFavorites(),
   posts: [],
-  postsLoading: true,
-  postsError: null,
   postsDetailed: [],
   postsDetailedLoading: true,
   postsDetailedError: null,
@@ -80,6 +54,9 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    setPosts: (state, action: PayloadAction<Post[]>) => {
+      state.posts = action.payload;
+    },
     addPostToFavorites: (state, action: PayloadAction<number>) => {
       state.favorites.push(action.payload);
       if (checkIsClientEnv()) {
@@ -97,23 +74,6 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPosts.pending, (state) => {
-        state.postsLoading = true;
-        state.postsError = null;
-      })
-      .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
-        state.posts = action.payload;
-        state.postsLoading = false;
-        if (state.posts.length < 1) {
-          toast.error("Nie znaleziono postów");
-        }
-      })
-      .addCase(fetchPosts.rejected, (state, action) => {
-        state.postsLoading = false;
-        state.posts = [];
-        state.postsError = action.payload?.error || "Błąd pobierania postów";
-        toast.error(state.postsError);
-      })
       .addCase(fetchPostById.pending, (state) => {
         state.postsDetailedLoading = true;
         state.postsDetailedError = null;
@@ -141,6 +101,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { addPostToFavorites, removePostFromFavorites } =
+export const { setPosts, addPostToFavorites, removePostFromFavorites } =
   postsSlice.actions;
 export default postsSlice.reducer;
