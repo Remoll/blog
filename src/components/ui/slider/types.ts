@@ -3,4 +3,6 @@ enum Direction {
   left = "left",
 }
 
-export { Direction };
+type SliderRef = React.RefObject<HTMLDivElement | null>;
+
+export { Direction, type SliderRef };

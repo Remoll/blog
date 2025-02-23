@@ -1,5 +1,5 @@
 import { slideResetPositionClasses } from "./consts";
-import { Direction } from "./types";
+import { Direction, SliderRef } from "./types";
 
 const getNextSlideIndex = (
   direction: Direction,
@@ -29,7 +29,7 @@ const getTranslateXProperty = (translateValue: string | number) =>
 
 const resetSlideTransformXProperty = (
   currentIndex: number | undefined,
-  sliderRef: React.RefObject<HTMLDivElement | null>
+  sliderRef: SliderRef
 ) => {
   if (!sliderRef?.current || currentIndex === undefined) {
     return;
@@ -52,7 +52,7 @@ const getSlideTransformXProperty = (
 
 const resetSlidePosition = (
   currentIndex: number | undefined,
-  sliderRef: React.RefObject<HTMLDivElement | null>
+  sliderRef: SliderRef
 ) => {
   if (sliderRef.current) {
     sliderRef.current.style.transition = slideResetPositionClasses;

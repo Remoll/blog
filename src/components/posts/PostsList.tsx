@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { filterPosts, sortPosts } from "./utils";
 import { useEffect, useState } from "react";
-import { fetchPosts } from "@/store/slices/postsSlice";
+import { fetchPosts } from "@/store/slices/postsSlice/postsSlice";
 
 const PostList = () => {
   const currentCategoryFilter = useSelector(

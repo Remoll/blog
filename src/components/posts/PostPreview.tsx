@@ -7,7 +7,7 @@ import {
   addPostToFavorites,
   fetchPostById,
   removePostFromFavorites,
-} from "@/store/slices/postsSlice";
+} from "@/store/slices/postsSlice/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
 import { useEffect } from "react";
