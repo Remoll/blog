@@ -1,10 +1,10 @@
 import PostsListResolver from "@/components/posts/PostListResolver";
-import { fetchPosts } from "@/services/posts";
+import { fetchPostsList } from "@/services/posts/posts";
 
-const PostsPage = async () => {
-  const response = await fetchPosts();
+const PostsListPage = async () => {
+  const response = await fetchPostsList();
 
   return <PostsListResolver fetchPostsResponse={response} />;
 };
 
-export default PostsPage;
+export default PostsListPage;

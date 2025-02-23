@@ -5,47 +5,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import {
   addPostToFavorites,
-  fetchPostById,
   removePostFromFavorites,
 } from "@/store/slices/postsSlice/postsSlice";
 import SafeHtml from "../ui/safeHtml/safeHtml";
 import { globalPaddingClasses } from "@/consts/consts";
-import { useEffect } from "react";
 import Link from "next/link";
+import { Post } from "@/interfaces/posts";
 
 interface PostPreviewProps {
-  id: number;
+  post: Post;
 }
 
-const PostPreview = ({ id }: PostPreviewProps) => {
+const PostPreview = ({ post }: PostPreviewProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const {
-    favorites: favoritesPosts,
-    postsDetailed,
-    postsDetailedLoading: loading,
-    postsDetailedError: error,
-  } = useSelector((state: RootState) => state.posts);
+  const { favorites: favoritesPosts } = useSelector(
+    (state: RootState) => state.posts
+  );
 
-  const post = postsDetailed.find((post) => post.id === id);
+  const isPostFavorive = favoritesPosts.includes(post.id);
 
-  const isPostFavorive = favoritesPosts.includes(id);
-
-  const handleSetCategoryFilter = () => {
+  const setIsPostFavorite = () => {
     if (isPostFavorive) {
-      dispatch(removePostFromFavorites(id));
+      dispatch(removePostFromFavorites(post.id));
     } else {
-      dispatch(addPostToFavorites(id));
+      dispatch(addPostToFavorites(post.id));
     }
   };
 
   const StarIcon = isPostFavorive ? FaStar : FaRegStar;
-
-  useEffect(() => {
-    if (!post) {
-      dispatch(fetchPostById(id));
-    }
-  }, [dispatch, post, id]);
 
   return (
     <div className={`${globalPaddingClasses} max-w-[75rem]`}>
@@ -56,47 +44,36 @@ const PostPreview = ({ id }: PostPreviewProps) => {
             Blog Edukacyjny
           </span>
         </Link>
-        {post && (
-          <button
-            onClick={() => handleSetCategoryFilter()}
-            className="flex items-center pb-6"
-          >
-            <StarIcon size="2rem" className="text-gray-900" />
-            <span className="text-xl font-opensans font-bold pl-3">
-              {isPostFavorive ? "usuń z ulubionych" : "dodaj do ulubionych"}
-            </span>
-          </button>
-        )}
+        <button
+          onClick={() => setIsPostFavorite()}
+          className="flex items-center pb-6"
+        >
+          <StarIcon size="2rem" className="text-gray-900" />
+          <span className="text-xl font-opensans font-bold pl-3">
+            {isPostFavorive ? "usuń z ulubionych" : "dodaj do ulubionych"}
+          </span>
+        </button>
       </div>
-      {loading ? (
-        <h1>Pobieranie posta...</h1>
-      ) : !error && post ? (
-        <article>
-          <header className="pb-6 text-black sm:text-primary">
-            <h1 className="text-8xl leading-3xloose font-playfair font-bold pb-6">
-              {post?.title}
-            </h1>
-            <p className="text-xs leading-normal font-opensans">
-              {post?.description}
-            </p>
-          </header>
-          <div className="pb-6 article-body">
-            <SafeHtml html={post.body} />
-          </div>
-          <Image
-            src={post?.imageUrl}
-            alt="example-blog-photo"
-            width={185}
-            height={58}
-            className="object-cover w-full h-[30rem] rounded-tl-card-lg rounded-br-card-lg pb-6"
-          />
-        </article>
-      ) : (
-        <>
-          <h1>Nie udało się pobrać posta</h1>
-          <h2>{error}</h2>
-        </>
-      )}
+      <article>
+        <header className="pb-6 text-black sm:text-primary">
+          <h1 className="text-8xl leading-3xloose font-playfair font-bold pb-6">
+            {post?.title}
+          </h1>
+          <p className="text-xs leading-normal font-opensans">
+            {post?.description}
+          </p>
+        </header>
+        <div className="pb-6 article-body">
+          <SafeHtml html={post.body} />
+        </div>
+        <Image
+          src={post?.imageUrl}
+          alt="example-blog-photo"
+          width={185}
+          height={58}
+          className="object-cover w-full h-[30rem] rounded-tl-card-lg rounded-br-card-lg pb-6"
+        />
+      </article>
     </div>
   );
 };

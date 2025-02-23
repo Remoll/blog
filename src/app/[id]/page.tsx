@@ -1,4 +1,5 @@
-import PostPreview from "@/components/posts/PostPreview";
+import PostsPreviewResolver from "@/components/posts/PostResolver";
+import { fetchPost } from "@/services/posts/posts";
 
 interface PostPageProps {
   params: Promise<{
@@ -6,10 +7,11 @@ interface PostPageProps {
   }>;
 }
 
-const Post = async ({ params }: PostPageProps) => {
+const PostPage = async ({ params }: PostPageProps) => {
   const stringId = (await params).id;
   const postId = parseInt(stringId);
-  return <PostPreview id={postId} />;
+  const response = await fetchPost(postId);
+  return <PostsPreviewResolver fetchPostResponse={response} />;
 };
 
-export default Post;
+export default PostPage;
