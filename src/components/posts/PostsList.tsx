@@ -17,9 +17,9 @@ const PostList = () => {
 
   const {
     favorites: favoritesPosts,
-    postsList,
-    loading,
-    error,
+    posts,
+    postsLoading: loading,
+    postsError: error,
   } = useSelector((state: RootState) => state.posts);
 
   const postSorterValue = useSelector(
@@ -27,7 +27,7 @@ const PostList = () => {
   );
 
   const filteredPosts = filterPosts(
-    postsList,
+    posts,
     currentCategoryFilter,
     isFavoritesFilterActive,
     favoritesPosts
@@ -38,10 +38,10 @@ const PostList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (postsList.length === 0) {
+    if (posts.length === 0) {
       dispatch(fetchPosts());
     }
-  }, [dispatch, postsList.length]);
+  }, [dispatch, posts.length]);
 
   if (loading) return <h1>Pobieranie postów...</h1>;
   if (error) return <p>Błąd: {error}</p>;

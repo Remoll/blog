@@ -27,7 +27,7 @@ export const fetchPostById = createAsyncThunk(
   "posts/fetchPostsById",
   async (postId: number, thunkAPI) => {
     try {
-      const response = await fetch(`${postsURL}/${postId}`);
+      const response = await fetch(`${postsURL}/${111}`);
       const data = await response.json();
       if (data.error) {
         return thunkAPI.rejectWithValue({ error: data.error });
@@ -50,29 +50,33 @@ const getInitialFavorites = (): number[] => {
       return [];
     }
 
-    const favoritesList = JSON.parse(jsonFavorites).map((id: string) =>
+    const favorites = JSON.parse(jsonFavorites).map((id: string) =>
       parseInt(id)
     );
 
-    return favoritesList;
+    return favorites;
   }
   return [];
 };
 
 interface PostsState {
-  postsList: Post[];
-  postsListDetailed: Post[];
+  posts: Post[];
+  postsLoading: boolean;
+  postsError: string | null;
+  postsDetailed: Post[];
+  postsDetailedLoading: boolean;
+  postsDetailedError: string | null;
   favorites: number[];
-  loading: boolean;
-  error: string | null;
 }
 
 const initialState: PostsState = {
   favorites: getInitialFavorites(),
-  postsList: [],
-  postsListDetailed: [],
-  loading: true,
-  error: null,
+  posts: [],
+  postsLoading: true,
+  postsError: null,
+  postsDetailed: [],
+  postsDetailedLoading: true,
+  postsDetailedError: null,
 };
 
 const postsSlice = createSlice({
@@ -101,46 +105,46 @@ const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.postsLoading = true;
+        state.postsError = null;
       })
       .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
-        state.postsList = action.payload;
-        state.loading = false;
+        state.posts = action.payload;
+        state.postsLoading = false;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.loading = false;
-        state.postsList = [];
+        state.postsLoading = false;
+        state.posts = [];
         //TODO: do poprawy
         const errorMessage = (action.payload as { error: string }).error;
-        state.error = errorMessage || "Error fetching posts";
+        state.postsError = errorMessage || "Error fetching posts";
       })
       .addCase(fetchPostById.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.postsDetailedLoading = true;
+        state.postsDetailedError = null;
       })
       .addCase(
         fetchPostById.fulfilled,
         (state, action: PayloadAction<Post>) => {
           const newPost = action.payload;
-          const postExistInStore = state.postsListDetailed.some(
+          const postExistInStore = state.postsDetailed.some(
             (post) => post.id === newPost.id
           );
           if (postExistInStore) {
-            state.postsListDetailed = state.postsListDetailed.map((post) =>
+            state.postsDetailed = state.postsDetailed.map((post) =>
               post.id === newPost.id ? newPost : post
             );
           } else {
-            state.postsListDetailed.push(newPost);
+            state.postsDetailed.push(newPost);
           }
-          state.loading = false;
+          state.postsDetailedLoading = false;
         }
       )
       .addCase(fetchPostById.rejected, (state, action) => {
-        state.loading = false;
+        state.postsDetailedLoading = false;
         //TODO: do poprawy
         const errorMessage = (action.payload as { error: string }).error;
-        state.error = errorMessage || "Error fetching posts";
+        state.postsDetailedError = errorMessage || "Error fetching posts";
       });
   },
 });

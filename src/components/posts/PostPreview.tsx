@@ -27,12 +27,12 @@ const PostPreview = ({ id }: PostPreviewProps) => {
 
   const {
     favorites: favoritesPosts,
-    postsListDetailed,
-    loading,
-    error,
+    postsDetailed,
+    postsDetailedLoading: loading,
+    postsDetailedError: error,
   } = useSelector((state: RootState) => state.posts);
 
-  const post = postsListDetailed.find((post) => post.id === id);
+  const post = postsDetailed.find((post) => post.id === id);
 
   // const favoritesPosts = useSelector(
   //   (state: RootState) => state.posts.favorites
@@ -52,7 +52,6 @@ const PostPreview = ({ id }: PostPreviewProps) => {
 
   useEffect(() => {
     if (!post) {
-      console.log("cooooo");
       dispatch(fetchPostById(id));
     }
   }, [dispatch, post, id]);
