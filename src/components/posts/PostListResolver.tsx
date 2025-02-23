@@ -20,10 +20,9 @@ const PostsListResolver = ({ fetchPostsResponse }: PostsListResolverProps) => {
     );
   }
 
-  if (data.length < 1)
-    return (
-      <h1 className={`${globalPaddingClasses}`}>Brak postów do wyświetlenia</h1>
-    );
+  if (data.length < 1) {
+    toast.error("Lista pobranych postów jest pusta");
+  }
 
   return <PostsList initialPosts={data} />;
 };

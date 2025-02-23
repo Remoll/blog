@@ -66,7 +66,7 @@ const PostList = ({ initialPosts }: PostList) => {
     setIsRendered(true);
   }, []);
 
-  if (sortedPosts.length < 1) return <h1>Brak postów do wyświetlenia</h1>;
+  const somePostsExist = sortedPosts.length > 0;
 
   return (
     <>
@@ -78,13 +78,18 @@ const PostList = ({ initialPosts }: PostList) => {
       <Categories />
       <div className={`${globalPaddingClasses} pb-[30rem]`}>
         <PostsFilters />
-        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {sortedPosts.map((post) => (
-            <li key={post.id}>
-              <PostCard post={post} />
-            </li>
-          ))}
-        </ul>
+
+        {somePostsExist ? (
+          <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {sortedPosts.map((post) => (
+              <li key={post.id}>
+                <PostCard post={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <h1>Brak postów do wyświetlenia</h1>
+        )}
       </div>
     </>
   );
